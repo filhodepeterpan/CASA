@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   logado: boolean = false;
 
-  constructor() {
+  constructor(private router : Router) {
     this.logado = localStorage.getItem("logado") === "true";
 
     const modoEscuro = localStorage.getItem("modoEscuro") == "true";
@@ -24,7 +26,9 @@ export class AppComponent {
 
     localStorage.setItem("logado", saida.toString());
 
-    location.reload();
+    this.router.navigate(['/home']).then(() => {
+      setTimeout(() => location.reload(), 100);
+    });
   }
 
 }

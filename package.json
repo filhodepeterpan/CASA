@@ -1,5 +1,5 @@
 {
-  "name": "projeto-casa",
+  "name": "casa",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@capacitor/app": "7.0.0",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/core": "7.1.0",
     "@capacitor/haptics": "7.0.0",
     "@capacitor/keyboard": "7.0.0",

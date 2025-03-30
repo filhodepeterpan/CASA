@@ -33,7 +33,7 @@ export class HomePage {
       }
     );
   }
-
+ 
   solicitaCadastro(){
     this.cadastrado = false;
   }
