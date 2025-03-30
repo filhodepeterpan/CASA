@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar id="barra-app">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title id="titulo-app">
+      <div id="titulo-app-logo">
+        <h1>Configurações</h1>     
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item  class="configuracoes">
+      <ion-toggle labelPlacement="start" alignment="center" aria-label="modo-escuro" [checked]="modoEscuro" (ionChange)="toggleModoEscuro($event)">Modo Escuro</ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>

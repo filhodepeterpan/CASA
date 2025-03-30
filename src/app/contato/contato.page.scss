@@ -1,0 +1,18 @@
+.contato{
+    font-family: var(--fonte-especial);
+    font-size: 2rem;
+    color: var(--cor-fonte);
+    padding-top: 1rem;
+}
+
+form ion-item{
+    color: var(--cor-fonte);
+}
+
+#mensagem{
+    padding: 2rem 0;
+}
+
+form ion-button{
+    --background: var(--cor-secundaria-forte);
+}

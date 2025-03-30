@@ -1,0 +1,50 @@
+#menu-header{
+    --ion-background-color: var(--cor-bg-menu);
+}
+
+#menu-lista{
+    height: 100%;
+    width: 100%;
+    --ion-background-color: var(--cor-bg-menu);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-item-lista{
+    display: flex;
+    align-items: center;
+    color: var(--cor-fonte);
+}
+
+.menu-item-lista ion-icon{
+    color: var(--cor-fonte);
+    padding: 0 0.5rem 0 0;
+}
+
+#menu-lista-usuario{
+    padding: 0.5rem;
+}
+
+#menu-lista-usuario-perfil{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: var(--cor-fonte);
+}
+
+#menu-lista-usuario-botoes-config{
+    --background: var(--cor-terciaria-forte);
+    font-weight: 600;
+    font-size: 0.7rem;
+}
+
+#menu-lista-usuario-botoes-sair{
+    --background: var(--cor-secundaria-forte);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.icone-botao{
+    padding: 0 0.25rem 0 0;
+}

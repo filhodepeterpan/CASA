@@ -7,5 +7,24 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  logado: boolean = false;
+
+  constructor() {
+    this.logado = localStorage.getItem("logado") === "true";
+
+    const modoEscuro = localStorage.getItem("modoEscuro") == "true";
+
+    if(modoEscuro){
+      document.documentElement.classList.add("dark");
+    }
+  }
+
+  logout(saida: boolean){
+    this.logado = saida;
+
+    localStorage.setItem("logado", saida.toString());
+
+    location.reload();
+  }
+
 }

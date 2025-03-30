@@ -1,20 +1,131 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+<ion-header [translucent]="true" *ngIf="logado">
+  <ion-toolbar id="barra-app">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" *ngIf="!categoriaEscolhida"></ion-menu-button>
+      <ion-back-button *ngIf="categoriaEscolhida" (click)="volta()" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title id="titulo-app">
+      <div id="titulo-app-logo">
+        <h1>C A S A</h1>     
+        <ion-icon name="home-outline" id="titulo-app-logo-casa"></ion-icon>
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div *ngIf="!logado && cadastrado"  class="login-container">
+    <img src="assets/home.png" width="100%" class="ion-padding">
+    <div class="ion-padding" id="login-container-caixa">
+
+      <div id="login-container-caixa-form">
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Usuário</ion-label>
+          <ion-input required [(ngModel)]="usuario" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input required [(ngModel)]="senha" type="password"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-button id="entrar" expand="full" (click)="login()">
+        <ion-icon name="enter-outline"></ion-icon>
+      </ion-button>
+
+      <p class="ion-text-center texto-login">Não tem uma conta ainda? <a class="link" (click)="solicitaCadastro()">Cadastre-se</a></p>
+
+    </div>
+  </div>
+
+  <form *ngIf="!cadastrado" class="login-container">
+    <div class="ion-padding" id="login-container-caixa">
+
+      <div id="login-container-caixa-form">
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Nome do Tutor</ion-label>
+          <ion-input required type="text"></ion-input>
+        </ion-item>
+
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Nome da Criança</ion-label>
+          <ion-input required type="text"></ion-input>
+        </ion-item>
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">ID do C.A.S.A</ion-label>
+          <ion-input required type="text"></ion-input>
+        </ion-item>
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input required type="email"></ion-input>
+        </ion-item>
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Usuário</ion-label>
+          <ion-input required [(ngModel)]="usuario" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input required [(ngModel)]="senha" type="password"></ion-input>
+        </ion-item>
+
+        <ion-item class="login-container-caixa-form-item">
+          <ion-label position="floating">Confirmar senha</ion-label>
+          <ion-input required type="password"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-button id="entrar" expand="full" (click)="finalizaCadastro()">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+
+      <p class="ion-text-center texto-login">Já tem uma conta? <a class="link" (click)="voltaLogin()">Logar</a></p>
+
+    </div>
+  </form>
+
+  <div *ngIf="logado">
+
+    <ion-grid id="categorias" *ngIf="!categoriaEscolhida">
+      <ion-row>
+        <ion-col size="6" *ngFor="let categoria of categorias" class="categorias-container">
+          <ion-card (click)="selecionaCategoria(categoria)" class="categorias-card categoria" color="{{categoria.cor}}">
+            <ion-card-header>
+              <ion-icon [name]="categoria.icone" size="large" class="categoria-icone"></ion-icon>
+            </ion-card-header>
+            <ion-card-content class="categoria-titulo">
+              {{categoria.nome}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+     
+    <ion-grid *ngIf="categoriaEscolhida">
+      <h1 id="categoria-nome">{{categoria}}</h1>
+      <ion-row>
+
+        <!-- <ion-col size="6">
+          <ion-card class="categorias-card" (click)="volta()">
+            <ion-card-header>
+              Voltar
+              </ion-card-header>
+              <ion-card-content>
+                <ion-icon name="return-down-back" size="large"></ion-icon>
+              </ion-card-content>
+            </ion-card>
+        </ion-col> -->
+
+        <ion-col size="6" *ngFor="let card of cardsFiltrados" class="card-container">
+          <div (click)="escolheCard(card.som_url)">
+              <img [src]="card.imagem_url" alt="{{card.titulo}}" class="card-imagem"  width="150"/>              
+          </div>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
+

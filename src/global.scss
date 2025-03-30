@@ -34,4 +34,100 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+// @import "@ionic/angular/css/palettes/dark.system.css";
+
+@font-face {
+    font-family: "Kobajeon";
+    src: url(assets/kobajeon.otf);
+}
+:root{
+    --cor-primaria: #A7D6F2;
+    --cor-primaria-forte: #5695FD;
+    --cor-secundaria: #F28585;
+    --cor-secundaria-forte:#ff3561 ;
+    --cor-terciaria: #C1E18C;
+    --cor-terciaria-forte: #6ABE9B;
+    --cor-quaternaria: #FFE8A3;
+    --cor-quaternaria-forte: #fdc05e ;
+    --cor-fonte: black;
+    --cor-bg-menu: white;
+    --fonte-especial: "Kobajeon";
+    --cor-link: #ff3561;
+}
+
+:root.dark{
+    --cor-primaria: #2a556e;
+    --cor-primaria-forte: #22385b;
+    --cor-secundaria: #bb2727;
+    --cor-secundaria-forte:#a71f3d ;
+    --cor-terciaria: #759640;
+    --cor-terciaria-forte: #2e7d5c;
+    --cor-fonte: white;
+    --cor-bg-menu: #2a556e;
+    --cor-link: #fd5277;
+}
+
+ion-content{
+    --ion-background-color: var(--cor-primaria);
+    color: var(--cor-fonte);
+}
+
+#barra-app{
+    --ion-background-color: var(--cor-secundaria-forte);
+}
+
+ion-buttons{
+    color: white;
+}
+
+#titulo-app{
+    color: white;
+    font-family: monospace;
+}
+
+#titulo-app-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo-app-logo-casa{
+    padding: 0.5rem 0 0 0.8rem;
+}
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(var(--cor-primaria), var(--cor-primaria-forte));
+}
+
+#login-container-caixa-form{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.login-container-caixa-form-item{
+    --ion-background-color: white;
+    border-radius: 24px;
+}
+
+#login{
+    color: white;
+}
+
+#botao-de-login{
+    display: flex;
+    justify-content: center;
+}
+
+#entrar{
+    --background: var(--cor-secundaria-forte);
+    color: var(--cor-quaternaria-forte);
+    margin-top: 1rem;
+
+}
+
+

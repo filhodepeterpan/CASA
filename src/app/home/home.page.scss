@@ -25,3 +25,60 @@
 #container a {
   text-decoration: none;
 }
+
+.categorias-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 150px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+
+.categoria-titulo{
+  font-family: var(--fonte-especial);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+#categoria-nome{
+  text-align: center;
+  padding: 1rem 1rem 1.5rem 1rem;
+  font-family: var(--fonte-especial);
+  font-size: 2rem;
+  color: var(--cor-fonte);
+}
+
+.card-container, .categorias-container{
+  display: flex;
+  justify-content: center;
+}
+
+ion-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+ion-card-content {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+ion-icon {
+  font-size: 32px;
+}
+
+.texto-login{
+  color: var(--cor-fonte);
+}
+
+.link{
+  color: var(--cor-link);
+}
+
