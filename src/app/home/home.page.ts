@@ -16,6 +16,8 @@ export class HomePage {
   cadastrado: boolean = true;
   categoriaEscolhida: boolean = false;
   categoria : string = "";
+  audioTocando: HTMLAudioElement | null = null;
+  carregando: boolean = true;
 
   constructor(private http: HttpClient) {
     this.logado = localStorage.getItem("logado") == "true";
@@ -27,11 +29,25 @@ export class HomePage {
     this.http.get<any>(apiUrl).subscribe(
       (next) => {
         this.cards = next;
+        this.esperaCarregamento();
       },
       (error) => {
         console.error('Erro ao chamar a API', error);
+        this.carregando = false;
       }
     );
+  }
+
+  esperaCarregamento(){
+    let imagens = this.cards.map(card => new Promise(resolve =>{
+      let imagem = new Image();
+      imagem.src = card.imagem_url;
+      imagem.onload = () => resolve(true);
+    }));
+
+    Promise.all(imagens).then(() =>{
+      this.carregando = false;
+    })
   }
  
   solicitaCadastro(){
@@ -72,12 +88,17 @@ export class HomePage {
   ];
   
   selecionaCategoria(categoria: any) {
+    this.carregando = true;
     this.categoriaEscolhida = true;
     this.categoria = categoria.nome;
+
+    this.esperaCarregamento();
   }
 
   get cardsFiltrados() {
-    return this.cards.filter(c => c.categoria === this.categoria);
+    return this.cards
+    .filter(c => c.categoria === this.categoria)
+    .sort((a,b) => a.titulo.localeCompare(b.titulo));
   }
   
   volta(){
@@ -86,7 +107,15 @@ export class HomePage {
   }
 
   escolheCard(url: string){
-    const audio = new Audio(url);
-    audio.play();
+    if (this.audioTocando && !this.audioTocando.ended) {
+      return;
+    }
+  
+    this.audioTocando = new Audio(url);
+    this.audioTocando.play();
+
+    this.audioTocando.onended = () => {
+      this.audioTocando = null;
+    };
   }
 }

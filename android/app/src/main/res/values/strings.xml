@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">projeto-casa</string>
-    <string name="title_activity_main">projeto-casa</string>
+    <string name="app_name">CASA</string>
+    <string name="title_activity_main">CASA</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
 </resources>
