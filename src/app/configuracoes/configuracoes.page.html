@@ -12,8 +12,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div class="config-area">
+    <h1  class="config-area-titulo">Tema</h1>
+    <ion-icon class="config-area-icone" name="color-palette"></ion-icon>
+  </div>
   <ion-list>
-    <ion-item  class="configuracoes" id="modo-escuro">
+    <ion-item  class="config-item" id="modo-escuro">
       <ion-toggle labelPlacement="start" alignment="center" aria-label="modo-escuro" [checked]="modoEscuro" (ionChange)="toggleModoEscuro($event)">Modo Escuro</ion-toggle>
     </ion-item>
   </ion-list>
