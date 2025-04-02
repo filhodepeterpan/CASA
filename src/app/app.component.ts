@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     // botão de voltar
     this.platform.backButton.subscribeWithPriority(10, () => {
       if (this.router.url != "/home"){
-        this.router.navigate(['/home']);
+        window.history.back();
       }
     });
 

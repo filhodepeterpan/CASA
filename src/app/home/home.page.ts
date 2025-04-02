@@ -27,7 +27,7 @@ export class HomePage {
       if (this.router.url == "/home" && this.logado && this.categoriaEscolhida){
         this.volta();
       }
-      else{
+      else if(this.router.url == "/home"){
         App.exitApp();
       }
     });
