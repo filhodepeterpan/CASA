@@ -12,16 +12,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h1  class="ion-text-center contato">Envie-nos uma mensagem</h1>
-  <form (ngSubmit)="enviaMensagem()" class="ion-padding">
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input required type="text" [(ngModel)]="assunto" name="assunto" placeholder="Assunto"></ion-input>
-    </ion-item>
-    <ion-item id="mensagem">
-      <ion-label position="floating"></ion-label>
-      <ion-textarea required [(ngModel)]="mensagem" name="mensagem" placeholder="Digite..."></ion-textarea>
-    </ion-item>
-    <ion-button expand="full" type="submit">Enviar</ion-button>
-  </form>
+  <div id="contato-container">
+    <h1  class="ion-text-center contato">Envie-nos uma mensagem</h1>
+    <form (ngSubmit)="enviaMensagem()" class="ion-padding">
+      <ion-item>
+        <ion-label position="floating"></ion-label>
+        <ion-input required type="text" [(ngModel)]="assunto" name="assunto" placeholder="Assunto"></ion-input>
+      </ion-item>
+      <ion-item id="mensagem">
+        <ion-label position="floating"></ion-label>
+        <ion-textarea required [(ngModel)]="mensagem" name="mensagem" placeholder="Digite..."></ion-textarea>
+      </ion-item>
+      <ion-button expand="full" type="submit">Enviar</ion-button>
+    </form>
+  </div>
 </ion-content>

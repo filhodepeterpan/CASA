@@ -20,3 +20,14 @@
 .config-item{
     color: var(--cor-fonte);
 }
+
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form ion-button{
+    padding: 1rem 0;
+    --background: var(--cor-secundaria-forte);
+}

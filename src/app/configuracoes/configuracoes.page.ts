@@ -31,4 +31,6 @@ export class ConfiguracoesPage implements OnInit {
     this.modoEscuro == true? aplicativo.classList.add("dark") : aplicativo.classList.remove("dark");
   }
 
+  atualizaCadastro(){}
+
 }

@@ -94,7 +94,7 @@
 
     <ion-grid id="categorias" *ngIf="!categoriaEscolhida">
       <ion-row>
-        <ion-col size="6" *ngFor="let categoria of categorias" class="categorias-container">
+        <ion-col [size]="colSize" *ngFor="let categoria of categorias" class="categorias-container">
           <ion-card (click)="selecionaCategoria(categoria)" class="categorias-card categoria" color="{{categoria.cor}}">
             <ion-card-header>
               <ion-icon [name]="categoria.icone" size="large" class="categoria-icone"></ion-icon>
@@ -116,9 +116,9 @@
       <h1 id="categoria-nome">{{categoria}}</h1>
       <ion-row>
 
-        <ion-col size="6" *ngFor="let card of cardsFiltrados" class="card-container">
+        <ion-col [size]="colSize" *ngFor="let card of cardsFiltrados" class="card-container">
           <div (click)="escolheCard(card.som_url)">
-              <img [src]="card.imagem_url" alt="{{card.titulo}}" class="card-imagem"  width="300"/>              
+              <img [src]="card.imagem_url" alt="{{card.titulo}}" class="card-imagem"  width="250"/>              
           </div>
         </ion-col>
 
