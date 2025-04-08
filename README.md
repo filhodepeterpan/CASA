@@ -31,7 +31,7 @@ O aplicativo conta com diversas telas que facilitam o uso da comunicação alter
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/login.png" width="250">
 
-<div>
+<div> <br>
 
 Tela inicial do app
 **Importante:** O **login** e a **edição de perfil** são apenas demonstrativos, com **dados fictícios**. Para testes, utilize:
@@ -50,7 +50,7 @@ Uma vez logado, o usuário só será deslogado se pressionar o botão **SAIR** n
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/cadastro.png" width="250">
 
-<div>
+<div> <br>
 
 O cadastro é apenas **demonstrativo** para tornar o APP visualmente mais completo. No momento há apenas a opção de login (VIDE **ITEM 1**).
 
@@ -63,7 +63,7 @@ O cadastro é apenas **demonstrativo** para tornar o APP visualmente mais comple
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/menu.png" width="250">  
 
-<div>
+<div> <br>
 
 No menu, é possível navegar entre diferentes sessões do aplicativo. Abaixo da visualização do usuário, o botão **SAIR** desloga o usuário, enquanto o botão **CONFIGURAÇÕES** redireciona para página de configuurações (VIDE **ITEM 7**)
 
@@ -76,7 +76,7 @@ No menu, é possível navegar entre diferentes sessões do aplicativo. Abaixo da
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/categorias.png" width="250">
 
-<div>
+<div> <br>
 
 A página de Categorias apresenta diversas seções que separam os cards tematicamente. Ao clicar em uma delas você será redirecionado para os cards correspondentes àquela categoria.
 
@@ -89,7 +89,7 @@ A página de Categorias apresenta diversas seções que separam os cards tematic
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/acoes.png" width="250">
 
-<div>
+<div> <br>
 
 Na página da categoria selecionada, você terá acesso aos respectivos cards. **Ao clicar em um card, um som será tocado** de acordo com o nome do card escolhido. Assim, o usuário poderá expressar palavras sem a necessidade uma verbalização tradicional.
 - **OBS:** Originalmente, a ideia é que este som saia através de um **dispositivo arduíno** que poderá ser usado pela criança.
@@ -103,7 +103,7 @@ Na página da categoria selecionada, você terá acesso aos respectivos cards. *
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/sobrenos.png" width="250">
 
-<div>
+<div> <br>
 
 Aqui estão algumas informações sobre o Projeto e as tecnologias usadas (página ainda em construção).
 
@@ -116,7 +116,7 @@ Aqui estão algumas informações sobre o Projeto e as tecnologias usadas (pági
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/configuracoes.png" width="250">
 
-<div>
+<div> <br>
 
 A página de configurações conta com 2 sessões: Tema e Perfil
 - **Tema:** o usuário pode escolher alternar para o "Modo Escuro" (VIDE **ITEM 10**);
@@ -132,7 +132,7 @@ A página de configurações conta com 2 sessões: Tema e Perfil
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/faleconosco.png" width="250">
 
-<div>
+<div> <br>
 
 Aqui foi integrado a API do **EmailJS**. O usuário tem a opção de escolher um assunto e digitar um texto para enviar diretamente para o email do projeto, facilitando a coleta de feedbacks por meio dos **beta testers**.
 
@@ -146,7 +146,7 @@ Aqui foi integrado a API do **EmailJS**. O usuário tem a opção de escolher um
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/horizontal.png" width="500">
 
-<div>
+<div> <br>
 
 Pensando em tornar o APP utilizável e responsivo também para **tablets** e celulares no **modo horizontal**, tivemos o cuidado de aplicar uma condicional que verifica a orientação utilizada pelo dispositivo e redistribui os cards de forma a evitar tamanhos desproporcionais e/ou muitos espaços vazios.
 
@@ -160,7 +160,7 @@ Pensando em tornar o APP utilizável e responsivo também para **tablets** e cel
 <div style="display: flex; align-items: center; gap: 1rem;">
 <img src="./downloads/telas/modoescuro.png" width="500">
 
-<div>
+<div> <br>
 
 Demonstração do APP no modo escuro (VIDE **ITEM 7**). 
 - O aplicativo salva essa configuração no local storage, mantendo a configuração escolhida pelo usuário mesmo após o fechamento do CASA.
@@ -178,7 +178,7 @@ O aplicativo está disponível para **Android** e pode ser baixado no seguinte d
 
 📂 [Download do APK](./downloads/app/CASA.apk)
 
-Por se tratar de um APK externo, é possível que o sistema operacional exiba um aviso de segurança. O aplicativo **não representa risco ao dispositivo**, mas, caso o usuário prefira, pode realizar uma verificação com um **antivírus** antes da instalação.
+ No GitHub, clique em **View raw** para realizar o download .Por se tratar de um APK externo, é possível que o sistema operacional exiba um aviso de segurança. O aplicativo **não representa risco ao dispositivo**, mas, caso o usuário prefira, pode realizar uma verificação com um **antivírus** antes da instalação.
 
 &nbsp;
 
