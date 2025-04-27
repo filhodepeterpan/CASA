@@ -21,7 +21,7 @@ export class HomePage {
   categoriaEscolhida: boolean = false;
   categoria : string = "";
   audioTocando: HTMLAudioElement | null = null;
-  carregando: boolean = true;
+  carregando? : boolean;
   colSize = "6";
 
   constructor(private http: HttpClient, private platform: Platform, private router: Router) {
@@ -41,11 +41,12 @@ export class HomePage {
 
   ngOnInit() {
     const apiUrl = 'https://api-pecs.vercel.app/cards.json';
+    this.carregando = true;
 
     this.http.get<any>(apiUrl).subscribe(
       (next) => {
         this.cards = next;
-        this.esperaCarregamento();
+        this.carregando = false;
       },
       (error) => {
         console.error('Erro ao chamar a API', error);
@@ -57,18 +58,6 @@ export class HomePage {
   @HostListener('window:resize', [])
   checaOrientacao() {
     this.colSize = window.innerWidth > window.innerHeight ? '3' : '6';
-  }
-
-  esperaCarregamento(){
-    let imagens = this.cards.map(card => new Promise(resolve =>{
-      let imagem = new Image();
-      imagem.src = card.imagem_url;
-      imagem.onload = () => resolve(true);
-    }));
-
-    Promise.all(imagens).then(() =>{
-      this.carregando = false;
-    })
   }
  
   solicitaCadastro(){
@@ -113,7 +102,7 @@ export class HomePage {
     this.categoriaEscolhida = true;
     this.categoria = categoria.nome;
 
-    this.esperaCarregamento();
+    setTimeout(() => {this.carregando = false;}, 300);
   }
 
   get cardsFiltrados() {
