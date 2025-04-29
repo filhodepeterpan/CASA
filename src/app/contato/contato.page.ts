@@ -43,6 +43,21 @@ export class ContatoPage implements OnInit {
         console.error('Erro ao enviar a mensagem', error);
         alert('Erro ao enviar a mensagem. Tente novamente.');
       });
+
+      this.limpaFormulario();
+  }
+
+  limpaFormulario(){
+    const inputs = document.querySelectorAll("input");
+    const textAreas = document.querySelectorAll("textarea");
+
+    inputs.forEach(input =>{
+      (input as HTMLInputElement).value = "";
+    });
+
+    textAreas.forEach(textArea =>{
+      (textArea as HTMLTextAreaElement).value = "";
+    });
   }
 
 }

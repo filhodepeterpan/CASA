@@ -50,8 +50,9 @@
     --cor-terciaria-forte: #6ABE9B;
     --cor-quaternaria: #FFE8A3;
     --cor-quaternaria-forte: #fdc05e ;
-    --cor-fonte: black;
-    --cor-bg-menu: white;
+    --cor-fonte: #000000;
+    --cor-borda: 0, 0, 0;
+    --cor-bg-menu: #FFFFFF;
     --fonte-especial: "Kobajeon";
     --cor-link: #ff3561;
 }
@@ -63,6 +64,7 @@
     --cor-secundaria-forte:#a71f3d ;
     --cor-terciaria: #759640;
     --cor-terciaria-forte: #2e7d5c;
+    --cor-borda: 255, 255, 255;
     --cor-fonte: white;
     --cor-bg-menu: #2a556e;
     --cor-link: #fd5277;
@@ -169,6 +171,24 @@ ion-buttons{
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+
+  textarea {
+    width: 100%;
+    padding: 1rem 0;
+    border: none;
+    font-family: inherit;
+    background-color: var(--cor-primaria);
+    color: var(--cor-fonte);
+    box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+  }
+
+  textarea::placeholder{
+    color: var(--cor-fonte);
+    opacity: 55%;
+  }
+  
   
 
 
