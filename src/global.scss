@@ -61,7 +61,7 @@
     --cor-primaria: #2a556e;
     --cor-primaria-forte: #22385b;
     --cor-secundaria: #bb2727;
-    --cor-secundaria-forte:#a71f3d ;
+    --cor-secundaria-forte:#a71f3d;
     --cor-terciaria: #759640;
     --cor-terciaria-forte: #2e7d5c;
     --cor-borda: 255, 255, 255;
@@ -115,7 +115,8 @@ ion-buttons{
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    background: linear-gradient(var(--cor-primaria), var(--cor-primaria-forte));
+    // background: linear-gradient(var(--cor-primaria), var(--cor-primaria-forte));
+    background-color: #c1e0f1;
 }
 
 #login-container-caixa-form{
@@ -139,8 +140,8 @@ ion-buttons{
 }
 
 #entrar{
-    --background: var(--cor-secundaria-forte);
-    color: var(--cor-quaternaria-forte);
+    --background: #ff3561;
+    color: #fdc05e;
     margin-top: 1rem;
 }
 

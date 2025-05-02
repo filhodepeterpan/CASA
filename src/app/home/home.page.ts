@@ -87,11 +87,11 @@ export class HomePage {
     { nome: 'Ações', icone: 'flash', cor: 'warning' },
     { nome: 'Alimentação', icone: 'fast-food', cor: 'danger' },
     { nome: 'Eventos', icone: 'balloon', cor: 'success' },
-    { nome: 'Lugares', icone: 'business', cor: 'tertiary' },
+    { nome: 'Lugares', icone: 'business', cor: 'dark' },
     { nome: 'Necessidades', icone: 'hand-left', cor: 'primary' },
     { nome: 'Objetos', icone: 'dice', cor: 'warning' },
     { nome: 'Sentimentos', icone: 'happy', cor: 'danger' },
-    { nome: 'Higiene', icone: 'medkit', cor: 'secondary' },
+    { nome: 'Higiene', icone: 'medkit', cor: 'light' },
     { nome: 'Partes do Corpo', icone: 'body', cor: 'tertiary' },
     { nome: 'Respostas Curtas', icone: 'thumbs-up', cor: 'success' },
     { nome: 'Pessoas', icone: 'people', cor: 'dark' }
