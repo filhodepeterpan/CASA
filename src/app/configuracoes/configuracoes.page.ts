@@ -31,6 +31,23 @@ export class ConfiguracoesPage implements OnInit {
     this.modoEscuro == true? aplicativo.classList.add("dark") : aplicativo.classList.remove("dark");
   }
 
-  atualizaCadastro(){}
+  atualizaCadastro(){
+
+    this.limpaFormulario();
+  }
+
+  limpaFormulario(){
+    const inputs = document.querySelectorAll("input");
+    const textAreas = document.querySelectorAll("textarea");
+
+    inputs.forEach(input =>{
+      (input as HTMLInputElement).value = "";
+    });
+
+    textAreas.forEach(textArea =>{
+      (textArea as HTMLTextAreaElement).value = "";
+    });
+  }
 
 }
+
