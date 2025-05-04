@@ -10,7 +10,7 @@
     font-family: var(--fonte-especial);
     font-size: 2rem;
     color: var(--cor-fonte);
-    padding-top: 1rem;
+    padding: 1rem 0;
 }
 
 form{
@@ -28,4 +28,25 @@ form ion-item{
 
 form ion-button{
     --background: var(--cor-secundaria-forte);
+}
+
+#modal-erro{
+    --ion-background-color: var(--cor-secundaria-forte);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+#modal-desc-mensagem{
+color: var(--cor-fonte);
+font-size: 1.1rem;
+}
+
+#modal-desc-botao{
+    text-align: center;
+    --background: var(--cor-secundaria-forte);
+    position: absolute;
+    flex: 0 1 auto;
+    right: 0.1rem;
+    font-size: 1rem;
 }

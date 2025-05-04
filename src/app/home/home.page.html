@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" *ngIf="logado">
   <ion-toolbar id="barra-app">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" id="botao-header">
       <ion-menu-button autoHide="false" *ngIf="!categoriaEscolhida"></ion-menu-button>
       <ion-back-button *ngIf="categoriaEscolhida" (click)="volta()" defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -34,6 +34,23 @@
       <ion-button id="entrar" expand="full" (click)="login()">
         <ion-icon name="enter-outline"></ion-icon>
       </ion-button>
+
+      <ion-modal [isOpen]="erroInfo" (didDismiss)="erroInfo = false"   [breakpoints]="[0, 0.3]" 
+      [initialBreakpoint]="0.3">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar id="modal-erro">
+              <ion-title>Erro ao fazer login</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <div id="modal-desc">
+              <p id="modal-desc-mensagem">Usuário ou senha inválidos.</p>
+              <ion-button id="modal-desc-botao" (click)="erroInfo = false">Tentar novamente</ion-button>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
 
       <p class="ion-text-center texto-login">Não tem uma conta ainda? <a class="link" (click)="solicitaCadastro()">Cadastre-se</a></p>
 

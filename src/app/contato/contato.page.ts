@@ -14,6 +14,9 @@ export class ContatoPage implements OnInit {
   casaID: string = "AZ126";
   assunto: string = "";
   mensagem: string = "";
+  modalSucesso? : boolean;
+  respostaTitulo: string = "";
+  respostaDesc: string = "";
 
   constructor() { }
 
@@ -36,12 +39,25 @@ export class ContatoPage implements OnInit {
 
     emailjs.send(serviceID, templateID, templateParams, userID)
       .then((response) => {
-        console.log('Mensagem enviada com sucesso!', response);
-        alert('Mensagem enviada com sucesso!');
+
+        if(this.assunto!="" && this.mensagem!=""){
+          console.log('Mensagem enviada com sucesso!', response);
+
+          this.modalSucesso = true;
+          this.respostaTitulo = "Mensagem enviada";
+          this.respostaDesc = "Sua mensagem foi enviada com sucesso! Aguarde para que nossa equipe responda no prazo de 3 dias úteis.";
+        }
+        else{
+          this.modalSucesso = true;
+          this.respostaTitulo = "Erro";
+          this.respostaDesc = "Por favor, preencha todos os campos para enviar sua mensagem.";
+        }
       })
       .catch((error) => {
         console.error('Erro ao enviar a mensagem', error);
-        alert('Erro ao enviar a mensagem. Tente novamente.');
+        this.modalSucesso = true;
+        this.respostaTitulo = "Algo deu errado";
+        this.respostaDesc = "Aparentemente tivemos um erro com o servidor. Tente novamente mais tarde ou envie seu e-mail diretamente para casaapp.contato@gmail.com";
       });
 
       this.limpaFormulario();

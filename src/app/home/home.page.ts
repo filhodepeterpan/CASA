@@ -23,6 +23,7 @@ export class HomePage {
   audioTocando: HTMLAudioElement | null = null;
   carregando? : boolean;
   colSize = "6";
+  erroInfo? : boolean;
 
   constructor(private http: HttpClient, private platform: Platform, private router: Router) {
     this.checaOrientacao();
@@ -78,7 +79,7 @@ export class HomePage {
       localStorage.setItem("logado", this.logado.toString());
     }
     else{
-      alert("Usuário ou senha inválidos");
+      this.erroInfo = true;
     }
   }
 

@@ -77,3 +77,24 @@ ion-icon {
   color: #ff3561;
 }
 
+#modal-erro{
+  --ion-background-color: #ff3561;
+  color: white;
+}
+
+#modal-desc{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-desc-mensagem{
+  font-size: 1.1rem;
+}
+
+#modal-desc-botao{
+  --background: #ff3561;
+}
+
