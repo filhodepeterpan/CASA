@@ -4,15 +4,15 @@
       <ion-toolbar>
         <div id="menu-lista-usuario">
           <div id="menu-lista-usuario-perfil">
-            <ion-icon class="icone-botao" name="person-circle-sharp" size="large"></ion-icon>
+            <img class="icone-botao-perfil" [src]="perfil.foto" alt="foto de perfil" id="icone-perfil">
             <p>Usuário</p>
           </div>
           <div id="menu-lista-usuario-botoes">
-            <ion-button routerLink="/configuracoes" id="menu-lista-usuario-botoes-config">
+            <ion-button routerLink="/configuracoes"  id="menu-lista-usuario-botoes-config" (click)="fechaMenu()">
               <ion-icon class="icone-botao" name="settings-outline"></ion-icon>
               Configurações
             </ion-button>
-            <ion-button (click)="logout(false)"id="menu-lista-usuario-botoes-sair">
+            <ion-button (click)="logout(false); fechaMenu()" id="menu-lista-usuario-botoes-sair">
               <ion-icon class="icone-botao" name="log-out-outline"></ion-icon>
               Sair
             </ion-button>
@@ -23,15 +23,15 @@
     <ion-content>
       <ion-list id="menu-lista">
         <div id="menu-lista-nav">
-          <ion-item routerLink="/home" routerDirection="root" class="menu-item-lista">
+          <ion-item routerLink="/home" routerDirection="root" class="menu-item-lista" (click)="fechaMenu()">
             <ion-icon name="home-outline"></ion-icon>
             Início
           </ion-item>
-          <ion-item routerLink="/contato" routerDirection="root" class="menu-item-lista">
+          <ion-item routerLink="/contato" routerDirection="root" class="menu-item-lista" (click)="fechaMenu()">
             <ion-icon name="at-outline"></ion-icon>
             Fale conosco
           </ion-item>
-          <ion-item routerLink="/sobre" routerDirection="root" class="menu-item-lista">
+          <ion-item routerLink="/sobre" routerDirection="root" class="menu-item-lista" (click)="fechaMenu()">
             <ion-icon name="information-circle-outline"></ion-icon>
             Sobre nós
           </ion-item>

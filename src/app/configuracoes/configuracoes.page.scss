@@ -21,10 +21,65 @@
     color: var(--cor-fonte);
 }
 
-.edit-form{
+.edit-form ion-row{
+    display: flex;
+    align-items: center;
+}
+
+#escolha-de-icone{
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+#opcoes-foto-de-perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+}
+
+#icones{
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.foto-de-perfil-atual{
+    width: 300px;
+    border-radius: 50%;
+}
+
+.icone-box{
+    display: flex;
+    justify-content: center;
+}
+
+#icone-box-item{
+    border-radius: 50%;
+}
+
+#icone-box-item:hover{
+    cursor: pointer;
+}
+
+#alteracoes {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px;
+    z-index: 2;
+}
+
+#alterar-icone{
+    --background: var(--cor-terciaria-forte);
+}
+
+#remover-icone{
+    --background: var(--cor-quaternaria-forte);
+    color: black;
 }
 
 form ion-button{
