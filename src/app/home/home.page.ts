@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
-
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -22,8 +22,10 @@ export class HomePage {
   categoria : string = "";
   audioTocando: HTMLAudioElement | null = null;
   carregando? : boolean;
-  colSize = "6";
+  colSizeCard = '6';
+  colSizeLoginSection = '12';
   erroInfo? : boolean;
+  respostaDesc: string = "";
 
   constructor(private http: HttpClient, private platform: Platform, private router: Router) {
     this.checaOrientacao();
@@ -58,7 +60,8 @@ export class HomePage {
 
   @HostListener('window:resize', [])
   checaOrientacao() {
-    this.colSize = window.innerWidth > window.innerHeight ? '3' : '6';
+    this.colSizeCard = window.innerWidth > window.innerHeight ? '3' : '6';
+    this.colSizeLoginSection = window.innerWidth > window.innerHeight ? '6' : '12';
   }
  
   solicitaCadastro(){
@@ -73,13 +76,21 @@ export class HomePage {
     this.cadastrado = true;
   }
 
-  login(){
-    if (this.usuario === "teste" && this.senha === "teste"){
+  login(form: NgForm){
+
+    if (form.invalid) {
+      this.erroInfo = true;
+      this.respostaDesc = "Preencha todos os campos obrigatórios.";
+      return;
+    }
+
+    if (this.usuario.trim() === "teste" && this.senha === "teste"){
       this.logado = true;
       localStorage.setItem("logado", this.logado.toString());
     }
     else{
       this.erroInfo = true;
+      this.respostaDesc = "Usuário ou senha inválidos";
     }
   }
 

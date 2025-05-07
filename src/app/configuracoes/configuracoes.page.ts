@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-configuracoes',
@@ -9,14 +9,22 @@ import { Component, OnInit } from '@angular/core';
 export class ConfiguracoesPage implements OnInit {
 
   modoEscuro : boolean = false;
+  colSizeEditProfile = '12';
 
   constructor() { 
+    this.checaOrientacao();
+    
     this.modoEscuro = localStorage.getItem("modoEscuro") == "true";
     this.aplicaModoEscuro();
   }
 
   ngOnInit() {
   }
+
+    @HostListener('window:resize', [])
+    checaOrientacao() {
+      this.colSizeEditProfile = window.innerWidth > window.innerHeight ? '6' : '12';
+    }
 
   toggleModoEscuro(event: any){
     this.modoEscuro = event.detail.checked;

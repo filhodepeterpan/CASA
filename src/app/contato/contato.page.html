@@ -15,7 +15,7 @@
   <div id="contato-container">
     <h1  class="ion-text-center contato">Envie-nos uma mensagem</h1>
 
-    <form (ngSubmit)="enviaMensagem()" class="ion-padding">
+    <form #contato="ngForm" (ngSubmit)="enviaMensagem(contato)" class="ion-padding">
 
       <ion-item>
         <ion-label position="floating"></ion-label>
@@ -24,10 +24,10 @@
 
       <ion-item id="mensagem">
         <ion-label position="floating"></ion-label>
-        <textarea required [(ngModel)]="mensagem" name="mensagem" placeholder="Digite..."></textarea>
+        <ion-textarea required [(ngModel)]="mensagem" name="mensagem" placeholder="Digite..."></ion-textarea>
       </ion-item>
 
-      <ion-button expand="full" type="submit">Enviar</ion-button>
+      <ion-button expand="full" type="submit" [disabled]="contato.invalid">Enviar</ion-button>
 
       <ion-modal [isOpen]="modalSucesso" (didDismiss)="modalSucesso = false"   [breakpoints]="[0, 0.3]" 
       [initialBreakpoint]="0.3">

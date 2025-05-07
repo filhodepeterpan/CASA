@@ -15,86 +15,93 @@
 
 <ion-content>
 
-  <div *ngIf="!logado && cadastrado"  class="login-container">
-    <img src="assets/CASA.png" width="100%" class="ion-padding">
-    <div class="ion-padding" id="login-container-caixa">
+  <div *ngIf="!logado && cadastrado" id="pagina-de-login">
 
-      <div id="login-container-caixa-form">
-        <ion-item class="login-container-caixa-form-item">
-          <ion-label position="floating">Usuário</ion-label>
-          <ion-input required [(ngModel)]="usuario" type="text"></ion-input>
-        </ion-item>
+    <ion-row id="pagina-de-login-itens">
+      <ion-col [size]="colSizeLoginSection">
+        <img src="assets/CASA.png" width="100%" class="ion-padding">
+      </ion-col>
 
-        <ion-item class="login-container-caixa-form-item">
-          <ion-label position="floating">Senha</ion-label>
-          <ion-input required [(ngModel)]="senha" type="password"></ion-input>
-        </ion-item>
-      </div>
+      <ion-col [size]="colSizeLoginSection">
+      <form #loginpage="ngForm" (ngSubmit)="login(loginpage)" class="ion-padding" id="login-container-caixa">
+        <div id="login-container-caixa-form">
+          <ion-item class="login-container-caixa-form-item">
+            <ion-label position="floating">Usuário</ion-label>
+            <ion-input required [(ngModel)]="usuario" type="text" name="usuario"></ion-input>
+          </ion-item>
 
-      <ion-button id="entrar" expand="full" (click)="login()">
-        <ion-icon name="enter-outline"></ion-icon>
-      </ion-button>
+          <ion-item class="login-container-caixa-form-item">
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input required [(ngModel)]="senha" type="password" name="senha"></ion-input>
+          </ion-item>
+        </div>
 
-      <ion-modal [isOpen]="erroInfo" (didDismiss)="erroInfo = false"   [breakpoints]="[0, 0.3]" 
-      [initialBreakpoint]="0.3">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar id="modal-erro">
-              <ion-title>Erro ao fazer login</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-            <div id="modal-desc">
-              <p id="modal-desc-mensagem">Usuário ou senha inválidos.</p>
-              <ion-button id="modal-desc-botao" (click)="erroInfo = false">Tentar novamente</ion-button>
-            </div>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
+        <ion-button id="entrar" expand="full" type="submit" [disabled]="loginpage.invalid">
+          <ion-icon name="enter-outline"></ion-icon>
+        </ion-button>
 
-      <p class="ion-text-center texto-login">Não tem uma conta ainda? <a class="link" (click)="solicitaCadastro()">Cadastre-se</a></p>
+        <ion-modal [isOpen]="erroInfo" (didDismiss)="erroInfo = false"   [breakpoints]="[0, 0.3]" 
+        [initialBreakpoint]="0.3">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar id="modal-erro">
+                <ion-title>Erro ao fazer login</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <div id="modal-desc">
+                <p id="modal-desc-mensagem">{{respostaDesc}}</p>
+                <ion-button id="modal-desc-botao" (click)="erroInfo = false">Tentar novamente</ion-button>
+              </div>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
 
-    </div>
+        <p class="ion-text-center texto-login">Não tem uma conta ainda? <a class="link" (click)="solicitaCadastro()">Cadastre-se</a></p>
+
+      </form>
+    </ion-col>
+  </ion-row>
   </div>
 
-  <form *ngIf="!cadastrado" class="login-container">
+  <form #cadastro="ngForm" (ngSubmit)="finalizaCadastro()" *ngIf="!cadastrado" class="login-container">
     <div class="ion-padding" id="login-container-caixa">
 
       <div id="login-container-caixa-form">
         <ion-item class="login-container-caixa-form-item">
           <ion-label position="floating">Nome do Tutor</ion-label>
-          <ion-input required type="text"></ion-input>
+          <ion-input required type="text" name="nomeTutor"></ion-input>
         </ion-item>
 
         <ion-item class="login-container-caixa-form-item">
           <ion-label position="floating">Nome da Criança</ion-label>
-          <ion-input required type="text"></ion-input>
+          <ion-input required type="text" name="nomeCrianca"></ion-input>
         </ion-item>
         <ion-item class="login-container-caixa-form-item">
           <ion-label position="floating">ID do C.A.S.A</ion-label>
-          <ion-input required type="text"></ion-input>
+          <ion-input required type="text" name="idCasa"></ion-input>
         </ion-item>
         <ion-item class="login-container-caixa-form-item">
           <ion-label position="floating">Email</ion-label>
-          <ion-input required type="email"></ion-input>
+          <ion-input required type="email" name="email"></ion-input>
         </ion-item>
         <ion-item class="login-container-caixa-form-item">
           <ion-label position="floating">Usuário</ion-label>
-          <ion-input required [(ngModel)]="usuario" type="text"></ion-input>
+          <ion-input required [(ngModel)]="usuario" type="text" name="usuario"></ion-input>
         </ion-item>
 
         <ion-item class="login-container-caixa-form-item">
           <ion-label position="floating">Senha</ion-label>
-          <ion-input required [(ngModel)]="senha" type="password"></ion-input>
+          <ion-input required [(ngModel)]="senha" type="password" name="senha"></ion-input>
         </ion-item>
 
         <ion-item class="login-container-caixa-form-item">
           <ion-label position="floating">Confirmar senha</ion-label>
-          <ion-input required type="password"></ion-input>
+          <ion-input required type="password" name="confirmacaoSenha"></ion-input>
         </ion-item>
       </div>
 
-      <ion-button id="entrar" expand="full" (click)="finalizaCadastro()">
+      <ion-button id="entrar" expand="full" type="submit" [disabled]="cadastro.invalid">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
 
@@ -107,7 +114,7 @@
 
     <ion-grid id="categorias" *ngIf="!categoriaEscolhida">
       <ion-row>
-        <ion-col [size]="colSize" *ngFor="let categoria of categorias" class="categorias-container">
+        <ion-col [size]="colSizeCard" *ngFor="let categoria of categorias" class="categorias-container">
           <ion-card (click)="selecionaCategoria(categoria)" class="categorias-card categoria" color="{{categoria.cor}}">
             <ion-card-header>
               <ion-icon [name]="categoria.icone" size="large" class="categoria-icone"></ion-icon>
@@ -129,7 +136,7 @@
       <h1 id="categoria-nome">{{categoria}}</h1>
       <ion-row>
 
-        <ion-col [size]="colSize" *ngFor="let card of cardsFiltrados" class="card-container">
+        <ion-col [size]="colSizeCard" *ngFor="let card of cardsFiltrados" class="card-container">
           <div (click)="escolheCard(card.som_url)">
               <img [src]="card.imagem_url" alt="{{card.titulo}}" class="card-imagem"  width="250" loading="lazy"/>              
           </div>

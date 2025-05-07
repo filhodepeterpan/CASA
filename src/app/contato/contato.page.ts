@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import emailjs from '@emailjs/browser'; 
+
 
 @Component({
   selector: 'app-contato',
@@ -23,7 +25,15 @@ export class ContatoPage implements OnInit {
   ngOnInit() {
   }
 
-  enviaMensagem(){
+  enviaMensagem(form: NgForm){
+
+    if (form.invalid) {
+      this.modalSucesso = true;
+      this.respostaTitulo = "Erro";
+      this.respostaDesc = "Por favor, preencha todos os campos obrigatórios antes de enviar.";
+      return;
+    }
+    
     const serviceID = 'service_casa';
     const templateID = 'template_8jnh90q';
     const userID = 'jz_fZnjS6I5Hw7E8t'; 
