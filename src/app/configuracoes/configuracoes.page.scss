@@ -21,6 +21,11 @@
     color: var(--cor-fonte);
 }
 
+#modo-escuro ion-icon{
+    padding: 0 0.5rem 0.1rem 0;
+    color: var(--cor-fonte);
+}
+
 .edit-form ion-row{
     display: flex;
     align-items: center;
@@ -42,9 +47,25 @@
 #icones{
     width: 100%;
     max-width: 100%;
+    max-height: 21em;
+    overflow-y: scroll;
     padding: 10px;
     box-sizing: border-box;
     margin-bottom: 20px;
+    border-radius: 12px;
+}
+
+#icones::-webkit-scrollbar{
+    width: 6px;
+}
+
+#icones::-webkit-scrollbar-thumb{
+    background-color: var(--cor-secundaria-forte);
+    border-radius: 20px;
+}
+
+#icones::-webkit-scrollbar-track{
+    background-color: var(--cor-primaria);
 }
 
 .foto-de-perfil-atual{

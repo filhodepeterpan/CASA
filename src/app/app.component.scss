@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     color: var(--cor-fonte);
+    font-size: 1.1rem;
 }
 
 .menu-item-lista ion-icon{
@@ -24,6 +25,7 @@
 
 #menu-lista-usuario{
     padding: 0.5rem;
+    font-size: 1.1rem;
 }
 
 #menu-lista-usuario-perfil{
@@ -36,18 +38,18 @@
 #menu-lista-usuario-botoes-config{
     --background: var(--cor-terciaria-forte);
     font-weight: 600;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 #menu-lista-usuario-botoes-sair{
     --background: var(--cor-secundaria-forte);
-    font-size: 0.7rem;
     font-weight: 600;
+    font-size: 0.8rem;
 }
 
 .icone-botao-perfil{
     padding: 0 0.5rem 0.25rem 0;
-    width: 60px;
+    width: 5em;
     border-radius: 50%;
 }
 .icone-botao{

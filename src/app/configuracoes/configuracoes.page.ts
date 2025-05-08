@@ -11,6 +11,7 @@ export class ConfiguracoesPage implements OnInit {
   modoEscuro : boolean = false;
   colSizeEditProfileImg = '12';
   colSizeEditProfileInfo = '12';
+  colSizeIcons = '4';
   fotoDePerfil: string = "padrao";
   iconeSelecionado: string = this.fotoDePerfil;
 
@@ -33,6 +34,7 @@ export class ConfiguracoesPage implements OnInit {
   checaOrientacao() {
     this.colSizeEditProfileImg = window.innerWidth > window.innerHeight ? '5' : '12';
     this.colSizeEditProfileInfo = window.innerWidth > window.innerHeight ? '7' : '12';
+    this.colSizeIcons = window.innerWidth > window.innerHeight ? '3' : '4';
   }
 
   toggleModoEscuro(event: any){
@@ -86,6 +88,8 @@ export class ConfiguracoesPage implements OnInit {
     this.fotoDePerfil = 'padrao';
     this.perfil.foto = `assets/perfil-icons/${this.fotoDePerfil}.png`;
     localStorage.removeItem('fotoDePerfil');
+
+    location.reload();
   }
 
   icones = [
@@ -96,8 +100,17 @@ export class ConfiguracoesPage implements OnInit {
     { nome: 'menina-negra-cabelo-liso', src: 'assets/perfil-icons/menina-negra-cabelo-liso.png' },
     { nome: 'menino-indigena', src: 'assets/perfil-icons/menino-indigena.png' },
     { nome: 'menina-loira', src: 'assets/perfil-icons/menina-loira.png' },
-    { nome: 'menino-loiro', src: 'assets/perfil-icons/menino-loiro.png' }
-    // Adicionar futuramente: crianças asiáticas/japonesas, com síndrome de down, deficientes visuais entre outras inclusões.
+    { nome: 'menino-loiro', src: 'assets/perfil-icons/menino-loiro.png' },
+    { nome: 'menina-asiatica', src: 'assets/perfil-icons/menina-asiatica.png' },
+    { nome: 'menino-asiatico', src: 'assets/perfil-icons/menino-asiatico.png' },
+    { nome: 'menina-sd', src: 'assets/perfil-icons/menina-sd.png' },
+    { nome: 'menino-sd', src: 'assets/perfil-icons/menino-sd.png' },
+    { nome: 'menina-negra-dreads', src: 'assets/perfil-icons/menina-negra-dreads.png' },
+    { nome: 'menino-pardo-cabelo-cacheado', src: 'assets/perfil-icons/menino-pardo-cabelo-cacheado.png' },
+    // { nome: 'menina-branca-cabelo-cacheado', src: 'assets/perfil-icons/menina-branca-cabelo-cacheado.png' },
+    // { nome: 'menino-branco-cabelo-cacheado', src: 'assets/perfil-icons/menino-branco-cabelo-cacheado.png' },
+    // { nome: 'menina-branca-cabelo-longo', src: 'assets/perfil-icons/menina-branca-cabelo-longo.png' },
+    // { nome: 'crianca-sem-cabelo', src: 'assets/perfil-icons/crianca-sem-cabelo.png' },
   ];
 
 }

@@ -20,24 +20,26 @@
 
     <ion-list>
       <ion-item class="config-item" id="modo-escuro">
-        <ion-toggle labelPlacement="start" alignment="center" aria-label="modo-escuro" [checked]="modoEscuro"
-          (ionChange)="toggleModoEscuro($event)">Modo Escuro</ion-toggle>
+        <ion-icon name="contrast"></ion-icon>
+          <ion-toggle labelPlacement="start" alignment="center" aria-label="modo-escuro" [checked]="modoEscuro"
+            (ionChange)="toggleModoEscuro($event)">
+            Modo Escuro
+          </ion-toggle>
       </ion-item>
     </ion-list>
   </div>
 
   <div class="config">
-    <div class="config-area">
-      <h1 class="config-area-titulo">Perfil</h1>
-      <ion-icon class="config-area-icone" name="person"></ion-icon>
-    </div>
 
     <form class="edit-form">
 
       <ion-row>
 
         <ion-col [size]="colSizeEditProfileImg">
-
+          <div class="config-area">
+            <h1 class="config-area-titulo">Perfil</h1>
+            <ion-icon class="config-area-icone" name="person"></ion-icon>
+          </div>
           <div class="ion-padding" id="escolha-de-icone">
             <div id="foto-de-perfil">
               <img class="foto-de-perfil-atual" [src]="perfil.foto" alt="foto de perfil" id="icone-perfil">
@@ -47,8 +49,8 @@
 
               <ion-grid id="icones">
                 <ion-row>
-                  <ion-col class="icone-box" [size]="4" *ngFor="let icone of icones">
-                    <img [src]="icone.src" width="100" id="icone-box-item" (click)="visualizaIcone(icone.nome)"/>
+                  <ion-col class="icone-box" [size]="colSizeIcons" *ngFor="let icone of icones">
+                    <img [src]="icone.src" width="100" id="icone-box-item" (click)="visualizaIcone(icone.nome)" />
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -62,6 +64,10 @@
         </ion-col>
 
         <ion-col [size]="colSizeEditProfileInfo">
+          <div class="config-area">
+            <h1 class="config-area-titulo">Conta</h1>
+            <ion-icon class="config-area-icone" name="person"></ion-icon>
+          </div>
           <div class="ion-padding" id="login-container-caixa">
 
             <div id="login-container-caixa-form">
