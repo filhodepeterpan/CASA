@@ -93,8 +93,8 @@ export class ConfiguracoesPage implements OnInit {
   }
 
   icones = [
-    { nome: 'menina-branca', src: 'assets/perfil-icons/menina-branca.png'},
-    { nome: 'menino-branco', src: 'assets/perfil-icons/menino-branco.png'},
+    { nome: 'menina-branca', src: 'assets/perfil-icons/menina-branca.png' },
+    { nome: 'menino-branco', src: 'assets/perfil-icons/menino-branco.png' },
     { nome: 'menina-negra', src: 'assets/perfil-icons/menina-negra.png' },
     { nome: 'menino-negro', src: 'assets/perfil-icons/menino-negro.png' },
     { nome: 'menina-negra-cabelo-liso', src: 'assets/perfil-icons/menina-negra-cabelo-liso.png' },
@@ -107,10 +107,20 @@ export class ConfiguracoesPage implements OnInit {
     { nome: 'menino-sd', src: 'assets/perfil-icons/menino-sd.png' },
     { nome: 'menina-negra-dreads', src: 'assets/perfil-icons/menina-negra-dreads.png' },
     { nome: 'menino-pardo-cabelo-cacheado', src: 'assets/perfil-icons/menino-pardo-cabelo-cacheado.png' },
-    // { nome: 'menina-branca-cabelo-cacheado', src: 'assets/perfil-icons/menina-branca-cabelo-cacheado.png' },
-    // { nome: 'menino-branco-cabelo-cacheado', src: 'assets/perfil-icons/menino-branco-cabelo-cacheado.png' },
-    // { nome: 'menina-branca-cabelo-longo', src: 'assets/perfil-icons/menina-branca-cabelo-longo.png' },
-    // { nome: 'crianca-sem-cabelo', src: 'assets/perfil-icons/crianca-sem-cabelo.png' },
+    { nome: 'menina-branca-2', src: 'assets/perfil-icons/menina-branca-2.png' },
+    { nome: 'menino-branco-2', src: 'assets/perfil-icons/menino-branco-2.png' },
+    { nome: 'menina-oculos', src: 'assets/perfil-icons/menina-oculos.png' },
+    { nome: 'menino-oculos', src: 'assets/perfil-icons/menino-oculos.png' },
+    { nome: 'menina-negra-2', src: 'assets/perfil-icons/menina-negra-2.png' },
+    { nome: 'menino-negro-2', src: 'assets/perfil-icons/menino-negro-2.png' },
+    { nome: 'crianca-sem-cabelo', src: 'assets/perfil-icons/crianca-sem-cabelo.png' },
+    { nome: 'dinossauro', src: 'assets/perfil-icons/dinossauro.png'},
+    { nome: 'gata', src: 'assets/perfil-icons/gata.png'},
+    { nome: 'cachorro', src: 'assets/perfil-icons/cachorro.png'},
+    { nome: 'pinguim', src: 'assets/perfil-icons/pinguim.png'},
+    { nome: 'astronauta', src: 'assets/perfil-icons/astronauta.png'},
+    { nome: 'robo', src: 'assets/perfil-icons/robo.png'},
+    { nome: 'samurai', src: 'assets/perfil-icons/samurai.png'},
   ];
 
 }
