@@ -126,6 +126,9 @@ ion-buttons{
 }
 
 .login-container-caixa-form-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     --ion-background-color: white;
     border-radius: 24px;
 }
@@ -190,6 +193,25 @@ ion-buttons{
     opacity: 55%;
   }
   
+// ALERTAS
+
+.alerta{
+
+}
+
+.alerta-alteracao{
+    
+}
+
+.botao-{
+
+}
+
+// ICONES DE INPUT
+
+.icone-senha {
+  cursor: pointer;
+}
   
 
 

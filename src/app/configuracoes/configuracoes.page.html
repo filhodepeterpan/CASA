@@ -21,10 +21,10 @@
     <ion-list>
       <ion-item class="config-item" id="modo-escuro">
         <ion-icon name="contrast"></ion-icon>
-          <ion-toggle labelPlacement="start" alignment="center" aria-label="modo-escuro" [checked]="modoEscuro"
-            (ionChange)="toggleModoEscuro($event)">
-            Modo Escuro
-          </ion-toggle>
+        <ion-toggle labelPlacement="start" alignment="center" aria-label="modo-escuro" [checked]="modoEscuro"
+          (ionChange)="toggleModoEscuro($event)">
+          Modo Escuro
+        </ion-toggle>
       </ion-item>
     </ion-list>
   </div>
@@ -73,34 +73,37 @@
             <div id="login-container-caixa-form">
               <ion-item class="login-container-caixa-form-item">
                 <ion-label position="floating">Nome do Tutor</ion-label>
-                <ion-input required type="text"></ion-input>
+                <ion-input required type="text" [(ngModel)]="nomeTutor" name="nomeTutor"></ion-input>
               </ion-item>
 
               <ion-item class="login-container-caixa-form-item">
                 <ion-label position="floating">Nome da Criança</ion-label>
-                <ion-input required type="text"></ion-input>
+                <ion-input required type="text" [(ngModel)]="nomeCrianca" name="nomeCrianca"></ion-input>
               </ion-item>
+
               <ion-item class="login-container-caixa-form-item">
                 <ion-label position="floating">Email</ion-label>
-                <ion-input required type="email"></ion-input>
+                <ion-input required type="email" [(ngModel)]="email" name="email"></ion-input>
               </ion-item>
+
               <ion-item class="login-container-caixa-form-item">
                 <ion-label position="floating">Usuário</ion-label>
-                <ion-input required type="text"></ion-input>
+                <ion-input required type="text" [(ngModel)]="usuario" name="usuario"></ion-input>
               </ion-item>
 
               <ion-item class="login-container-caixa-form-item">
                 <ion-label position="floating">Nova senha</ion-label>
-                <ion-input required type="password"></ion-input>
+                <ion-input required type="password" [(ngModel)]="novaSenha" name="novaSenha"></ion-input>
               </ion-item>
 
               <ion-item class="login-container-caixa-form-item">
                 <ion-label position="floating">Confirmar senha</ion-label>
-                <ion-input required type="password"></ion-input>
+                <ion-input required type="password" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
               </ion-item>
             </div>
 
             <ion-button expand="full" (click)="atualizaCadastro()">Salvar</ion-button>
+            <ion-button expand="full" (click)="deletaConta()" color="dark">Excluir conta</ion-button>
           </div>
         </ion-col>
 

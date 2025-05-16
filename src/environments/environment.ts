@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+    emailJS: {
+    serviceID: 'service_casa',
+    templateID: 'template_8jnh90q',
+    userID: 'jz_fZnjS6I5Hw7E8t'
+  }
 };
 
 /*

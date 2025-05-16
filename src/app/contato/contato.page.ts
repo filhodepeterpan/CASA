@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 import emailjs from '@emailjs/browser'; 
 
 
@@ -10,68 +12,84 @@ import emailjs from '@emailjs/browser';
   standalone: false
 })
 export class ContatoPage implements OnInit {
-  nomeTutor: string = "Douglas";
-  email: string = "douglassoares.cinema@gmail.com";
-  usuario: string = "doug2609";
-  casaID: string = "AZ126";
   assunto: string = "";
   mensagem: string = "";
-  modalSucesso? : boolean;
-  respostaTitulo: string = "";
-  respostaDesc: string = "";
 
-  constructor() { }
+  constructor(private alertController: AlertController) { }
 
   ngOnInit() {
   }
 
-  enviaMensagem(form: NgForm){
+async enviaMensagem(form: NgForm) {
+  if (form.invalid) return;
 
-    if (form.invalid) {
-      this.modalSucesso = true;
-      this.respostaTitulo = "Erro";
-      this.respostaDesc = "Por favor, preencha todos os campos obrigatórios antes de enviar.";
-      return;
-    }
-    
-    const serviceID = 'service_casa';
-    const templateID = 'template_8jnh90q';
-    const userID = 'jz_fZnjS6I5Hw7E8t'; 
+  const confirmAlert = await this.alertController.create({
+    header: 'Confirmar envio',
+    message: 'Você tem certeza que deseja enviar esta mensagem?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'alert-button-cancel'
+      },
+      {
+        text: 'Enviar',
+        cssClass: 'alert-button-send',
+        handler: () => this.enviaEmail() // chama a função de envio real
+      }
+    ]
+  });
 
-    const templateParams = {
-      nomeTutor: this.nomeTutor,
-      email: this.email,
-      mensagem: this.mensagem,
-      casaID: this.casaID,
-      usuario: this.usuario,
-      assunto: this.assunto
-    };
+  await confirmAlert.present();
+}
 
-    emailjs.send(serviceID, templateID, templateParams, userID)
-      .then((response) => {
+async enviaEmail() {
+  const serviceID = environment.emailJS.serviceID;
+  const templateID = environment.emailJS.templateID;
+  const userID = environment.emailJS.userID;
 
-        if(this.assunto!="" && this.mensagem!=""){
-          console.log('Mensagem enviada com sucesso!', response);
+  const nomeTutor = localStorage.getItem("nomeTutor") || "";
+  const email = localStorage.getItem("email") || "";
+  const casaID = localStorage.getItem("casaID") || "";
+  const usuario = localStorage.getItem("usuario") || "";
 
-          this.modalSucesso = true;
-          this.respostaTitulo = "Mensagem enviada";
-          this.respostaDesc = "Sua mensagem foi enviada com sucesso! Aguarde para que nossa equipe responda no prazo de 3 dias úteis.";
-        }
-        else{
-          this.modalSucesso = true;
-          this.respostaTitulo = "Erro";
-          this.respostaDesc = "Por favor, preencha todos os campos para enviar sua mensagem.";
-        }
-      })
-      .catch((error) => {
-        console.error('Erro ao enviar a mensagem', error);
-        this.modalSucesso = true;
-        this.respostaTitulo = "Algo deu errado";
-        this.respostaDesc = "Aparentemente tivemos um erro com o servidor. Tente novamente mais tarde ou envie seu e-mail diretamente para casaapp.contato@gmail.com";
-      });
+  const templateParams = {
+    nomeTutor: nomeTutor,
+    email: email,
+    casaID: casaID,
+    usuario: usuario,
+    assunto: this.assunto,
+    mensagem: this.mensagem
+  };
 
-      this.limpaFormulario();
+  try {
+    await emailjs.send(serviceID, templateID, templateParams, userID);
+
+    const sucesso = await this.alertController.create({
+      header: 'Mensagem enviada',
+      message: 'Sua mensagem foi enviada com sucesso! Aguarde resposta em até 3 dias úteis.',
+      buttons: ['OK'],
+      cssClass: 'alert-sucesso'
+    });
+
+    await sucesso.present();
+    this.limpaFormulario();
+
+  } catch (error) {
+    console.error('Erro ao enviar a mensagem', error);
+
+    const erro = await this.alertController.create({
+      header: 'Erro no envio',
+      message: 'Tivemos um problema ao enviar sua mensagem. Tente novamente mais tarde ou envie um e-mail diretamente para <strong>casaapp.contato@gmail.com</strong>.',
+      buttons: ['OK'],
+      cssClass: 'alert-erro'
+    });
+
+    await erro.present();
   }
+}
+
+
 
   limpaFormulario(){
     const inputs = document.querySelectorAll("input");

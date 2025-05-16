@@ -5,7 +5,10 @@
         <div id="menu-lista-usuario">
           <div id="menu-lista-usuario-perfil">
             <img class="icone-botao-perfil" [src]="perfil.foto" alt="foto de perfil" id="icone-perfil">
-            <p>Usuário</p>
+            <div>
+              <p>{{nomeCrianca}}</p>
+              <p id="usuarioLogado">{{usuarioLogado}}</p>
+            </div>
           </div>
           <div id="menu-lista-usuario-botoes">
             <ion-button routerLink="/configuracoes"  id="menu-lista-usuario-botoes-config" (click)="fechaMenu()">
