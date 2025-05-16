@@ -43,6 +43,9 @@ export class ConfiguracoesPage implements OnInit {
 
   // Array de objetos com os ícones disponíveis para o perfil (nome e URL da imagem)
   icones = [
+    { nome: 'autismo', src: 'assets/perfil-icons/autismo.png' },
+    { nome: 'girassol', src: 'assets/perfil-icons/girassol.png' },
+    { nome: 'coracao', src: 'assets/perfil-icons/coracao.png' },
     { nome: 'menina-branca', src: 'assets/perfil-icons/menina-branca.png' },
     { nome: 'menino-branco', src: 'assets/perfil-icons/menino-branco.png' },
     { nome: 'menina-negra', src: 'assets/perfil-icons/menina-negra.png' },
@@ -68,9 +71,21 @@ export class ConfiguracoesPage implements OnInit {
     { nome: 'gata', src: 'assets/perfil-icons/gata.png'},
     { nome: 'cachorro', src: 'assets/perfil-icons/cachorro.png'},
     { nome: 'pinguim', src: 'assets/perfil-icons/pinguim.png'},
+    { nome: 'panda', src: 'assets/perfil-icons/panda.png'},
+    { nome: 'dragao-verde', src: 'assets/perfil-icons/dragao-verde.png'},
+    { nome: 'dragao-vermelho', src: 'assets/perfil-icons/dragao-vermelho.png'},
     { nome: 'astronauta', src: 'assets/perfil-icons/astronauta.png'},
     { nome: 'robo', src: 'assets/perfil-icons/robo.png'},
     { nome: 'samurai', src: 'assets/perfil-icons/samurai.png'},
+    { nome: 'detetive', src: 'assets/perfil-icons/detetive.png'},
+    { nome: 'princesa-1', src: 'assets/perfil-icons/princesa-1.png'},
+    { nome: 'princesa-2', src: 'assets/perfil-icons/princesa-2.png'},
+    { nome: 'escudeiro', src: 'assets/perfil-icons/escudeiro.png'},
+    { nome: 'elfo-arqueiro', src: 'assets/perfil-icons/elfo-arqueiro.png'},
+    { nome: 'cavaleira', src: 'assets/perfil-icons/cavaleira.png'},
+    { nome: 'maga', src: 'assets/perfil-icons/maga.png'},
+    { nome: 'mago', src: 'assets/perfil-icons/mago.png'},
+    { nome: 'fada', src: 'assets/perfil-icons/fada.png'},
   ];
 
   // CONSTRUTOR
