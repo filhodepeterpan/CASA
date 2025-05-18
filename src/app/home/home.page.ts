@@ -102,6 +102,7 @@ categorias = [
       email: this.email,
       usuario: this.usuario,
       senha: this.senha,
+      icone: 'padrao'
     };
 
     console.log('Enviando dados para cadastro:', usuarioCadastro);
@@ -167,6 +168,7 @@ async login(form: NgForm) {
           localStorage.setItem("nomeCrianca", res.data.nome_crianca);
           localStorage.setItem("email", res.data.email);
           localStorage.setItem("usuario", res.data.usuario);
+          localStorage.setItem("fotoDePerfil", res.data.icone);
 
           location.reload();
         }

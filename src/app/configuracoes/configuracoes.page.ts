@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { AlertController } from '@ionic/angular';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-configuracoes',
@@ -20,6 +21,7 @@ export class ConfiguracoesPage implements OnInit {
   colSizeIcons = '4';
   
   // Propriedades dos dados da conta (informações que serão preenchidas e alteradas via formulário)
+  casaID: string = "";
   nomeTutor: string = "";
   nomeCrianca: string = "";
   email: string = "";
@@ -27,6 +29,7 @@ export class ConfiguracoesPage implements OnInit {
   // Propriedades para alteração de senha (nova senha e confirmação)
   novaSenha: string = "";
   confirmarSenha: string = "";
+  alteracaoDeSenha : boolean = false;
 
   // ID do usuário, utilizado para identificar o registro no banco durante atualizações ou exclusões
   id: number = 0; 
@@ -37,8 +40,8 @@ export class ConfiguracoesPage implements OnInit {
   iconeSelecionado: string = this.fotoDePerfil;
   logado: boolean = false;
   // Objeto "perfil" que guarda o caminho (URL) da imagem do perfil; usado na interface (imagem exibida)
-  perfil: { foto: string } = {
-    foto: `assets/perfil-icons/${this.fotoDePerfil}.png`
+  perfil: { icone: string } = {
+    icone: `assets/perfil-icons/${this.fotoDePerfil}.png`
   };
 
   // Array de objetos com os ícones disponíveis para o perfil (nome e URL da imagem)
@@ -108,10 +111,11 @@ export class ConfiguracoesPage implements OnInit {
     const iconeSalvo = localStorage.getItem('fotoDePerfil');
     if (iconeSalvo) {
       this.fotoDePerfil = iconeSalvo;
-      this.perfil.foto = `assets/perfil-icons/${this.fotoDePerfil}.png`;
+      this.perfil.icone = `assets/perfil-icons/${this.fotoDePerfil}.png`;
     }
     
     // Carrega os demais dados do usuário armazenados no localStorage para pré-preencher os inputs
+    this.casaID = localStorage.getItem("casaID") || "";
     this.nomeTutor = localStorage.getItem('nomeTutor') || "";
     this.nomeCrianca = localStorage.getItem('nomeCrianca') || "";
     this.email = localStorage.getItem('email') || "";
@@ -147,9 +151,11 @@ export class ConfiguracoesPage implements OnInit {
   }
 
   // Método para atualizar os dados da conta do usuário
-async atualizaCadastro() {
+async atualizaCadastro(form: NgForm) {
+  const dadosForm = form.value;
+
   // Validação para senha
-  if ((this.novaSenha || this.confirmarSenha) && (this.novaSenha != this.confirmarSenha)) {
+  if ((this.novaSenha || this.confirmarSenha) && (this.novaSenha !== this.confirmarSenha)) {
     const alert = await this.alertController.create({
       header: 'Erro',
       message: 'As senhas não coincidem.',
@@ -160,20 +166,23 @@ async atualizaCadastro() {
     return;
   }
 
-  // Prepara os dados
+  // Prepara os dados atualizados
   let dadosAtualizados: any = {
     id: this.id,
-    nome_tutor: this.nomeTutor,
-    nome_crianca: this.nomeCrianca,
-    email: this.email,
-    usuario: this.usuario
+    id_casa: this.casaID, // Inclui o ID da CASA manualmente
+    nome_tutor: dadosForm.nomeTutor,
+    nome_crianca: dadosForm.nomeCrianca,
+    email: dadosForm.email,
+    usuario: dadosForm.usuario,
+    icone: this.fotoDePerfil
   };
 
+  // Adiciona a senha se foi alterada
   if (this.novaSenha) {
     dadosAtualizados.senha = this.novaSenha;
   }
 
-  // Faz a requisição
+  // Envia os dados para o backend
   this.usuarioService.atualizarUsuario(dadosAtualizados).subscribe(
     async (res: any) => {
       if (res.status === "sucesso") {
@@ -181,9 +190,23 @@ async atualizaCadastro() {
           header: 'Sucesso!',
           message: 'Dados atualizados com sucesso.',
           cssClass: 'alerta-alteracao',
-          buttons: ['OK']
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                location.reload();
+              }
+            }
+          ]
         });
         await successAlert.present();
+
+        // Atualiza localStorage
+        localStorage.setItem("nomeTutor", dadosForm.nomeTutor);
+        localStorage.setItem("nomeCrianca", dadosForm.nomeCrianca);
+        localStorage.setItem("email", dadosForm.email);
+        localStorage.setItem("usuario", dadosForm.usuario);
+        localStorage.setItem("fotoDePerfil", this.fotoDePerfil);
       } else {
         const errorAlert = await this.alertController.create({
           header: 'Erro',
@@ -205,6 +228,10 @@ async atualizaCadastro() {
       console.error("Erro na requisição:", err);
     }
   );
+}
+
+ativaEdicaoSenha() {
+  this.alteracaoDeSenha = !this.alteracaoDeSenha;
 }
 
   // Função para deletar a conta do usuário
@@ -268,7 +295,7 @@ async deletaConta() {
   // Atualiza a visualização do ícone selecionado, alterando a imagem exibida
   visualizaIcone(nome: string) {
     this.iconeSelecionado = nome;
-    this.perfil.foto = `assets/perfil-icons/${this.iconeSelecionado}.png`;
+    this.perfil.icone = `assets/perfil-icons/${this.iconeSelecionado}.png`;
   }
 
   // Atualiza o ícone do perfil, salvando a escolha no localStorage e recarregando a página para refletir a mudança
@@ -281,7 +308,7 @@ async deletaConta() {
   // Remove o ícone personalizado e retorna ao ícone padrão (removendo a informação do localStorage e recarregando)
   removeIcone(){
     this.fotoDePerfil = 'padrao';
-    this.perfil.foto = `assets/perfil-icons/${this.fotoDePerfil}.png`;
+    this.perfil.icone = `assets/perfil-icons/${this.fotoDePerfil}.png`;
     localStorage.removeItem('fotoDePerfil');
     location.reload();
   }

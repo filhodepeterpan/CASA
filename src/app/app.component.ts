@@ -86,6 +86,7 @@ async logout(saida: boolean) {
           localStorage.removeItem("nomeCrianca");
           localStorage.removeItem("email");
           localStorage.removeItem("usuario");
+          localStorage.removeItem("fotoDePerfil");
 
           this.router.navigate(['/home']).then(() => {
             setTimeout(() => location.reload(), 100);

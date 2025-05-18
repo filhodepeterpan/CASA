@@ -42,7 +42,7 @@
           </div>
           <div class="ion-padding" id="escolha-de-icone">
             <div id="foto-de-perfil">
-              <img class="foto-de-perfil-atual" [src]="perfil.foto" alt="foto de perfil" id="icone-perfil">
+              <img class="foto-de-perfil-atual" [src]="perfil.icone" alt="foto de perfil" id="icone-perfil">
             </div>
 
             <div id="opcoes-foto-de-perfil">
@@ -68,9 +68,15 @@
             <h1 class="config-area-titulo">Conta</h1>
             <ion-icon class="config-area-icone" name="person"></ion-icon>
           </div>
-          <div class="ion-padding" id="login-container-caixa">
+          <form #form="ngForm" (ngSubmit)="atualizaCadastro(form)" class="ion-padding" id="login-container-caixa">
 
             <div id="login-container-caixa-form">
+
+              <ion-item class="login-container-caixa-form-item campoDesativado">
+                <ion-label position="floating">ID do C.A.S.A</ion-label>
+                <ion-input readonly type="text" [(ngModel)]="casaID" name="id_casa"></ion-input>
+              </ion-item>
+
               <ion-item class="login-container-caixa-form-item">
                 <ion-label position="floating">Nome do Tutor</ion-label>
                 <ion-input required type="text" [(ngModel)]="nomeTutor" name="nomeTutor"></ion-input>
@@ -91,20 +97,26 @@
                 <ion-input required type="text" [(ngModel)]="usuario" name="usuario"></ion-input>
               </ion-item>
 
-              <ion-item class="login-container-caixa-form-item">
+
+
+              <ion-item class="login-container-caixa-form-item" [ngClass]="{'campoDesativado' : !alteracaoDeSenha}">
                 <ion-label position="floating">Nova senha</ion-label>
-                <ion-input required type="password" [(ngModel)]="novaSenha" name="novaSenha"></ion-input>
+                <ion-input type="password" [(ngModel)]="novaSenha" name="novaSenha" [readonly]="!alteracaoDeSenha">
+                </ion-input>
+                <ion-buttons slot="end" (click)="ativaEdicaoSenha()">
+                  <ion-icon [name]="alteracaoDeSenha ? 'checkmark' : 'create-outline'" color="dark" size="large" id="botaoEditarSenha"></ion-icon>
+                </ion-buttons>
               </ion-item>
 
-              <ion-item class="login-container-caixa-form-item">
+              <ion-item class="login-container-caixa-form-item campoDesativado" [ngClass]="{'campoDesativado' : !alteracaoDeSenha}">
                 <ion-label position="floating">Confirmar senha</ion-label>
-                <ion-input required type="password" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
+                <ion-input type="password" [(ngModel)]="confirmarSenha" name="confirmarSenha" [readonly]="!alteracaoDeSenha"></ion-input>
               </ion-item>
             </div>
 
-            <ion-button expand="full" (click)="atualizaCadastro()">Salvar</ion-button>
+            <ion-button expand="full" type="submit">Salvar</ion-button>
             <ion-button expand="full" (click)="deletaConta()" color="dark">Excluir conta</ion-button>
-          </div>
+          </form>
         </ion-col>
 
       </ion-row>

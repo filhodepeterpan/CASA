@@ -107,3 +107,11 @@ form ion-button{
     padding: 1rem 0;
     --background: var(--cor-secundaria-forte);
 }
+
+.campoDesativado{
+    --background: rgb(183, 183, 183);
+}
+
+#botaoEditarSenha:hover{
+    cursor: pointer;
+}
