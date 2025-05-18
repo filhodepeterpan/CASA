@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="logado">
   <ion-toolbar id="barra-app">
     <ion-buttons slot="start" id="botao-header">
       <ion-menu-button autoHide="false"></ion-menu-button>
@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="logado">
   <div class="config">
     <div class="config-area">
       <h1 class="config-area-titulo">Tema</h1>

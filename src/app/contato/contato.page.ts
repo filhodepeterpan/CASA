@@ -14,8 +14,11 @@ import emailjs from '@emailjs/browser';
 export class ContatoPage implements OnInit {
   assunto: string = "";
   mensagem: string = "";
+  logado: boolean = false;
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController) {
+    this.logado = localStorage.getItem("logado") === "true";
+   }
 
   ngOnInit() {
   }

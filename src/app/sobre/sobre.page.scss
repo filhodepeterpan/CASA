@@ -1,3 +1,7 @@
+#sobre-nos{
+    font-size: 1.1rem;
+}
+
 .sobre-nos-titulo{
     font-family: var(--fonte-especial);
     font-size: 3rem;
@@ -6,4 +10,26 @@
 
 #sobre-nos-lista ion-item{
     color: var(--cor-fonte);
+}
+
+#logotipos-instituicao div{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#logotipos-instituicao div ion-col{
+    padding: 1rem 0;
+}
+
+.autor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.autor img{
+    border-radius: 50%;
+    border: 2px solid white;
+    margin: 1rem 0;
 }

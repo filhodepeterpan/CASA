@@ -148,7 +148,7 @@ voltaLogin() {
 }
 
   // Método para efetuar o login usando o UsuarioService
-login(form: NgForm) {
+async login(form: NgForm) {
   if (form.invalid) {
     return;
   }
@@ -167,6 +167,8 @@ login(form: NgForm) {
           localStorage.setItem("nomeCrianca", res.data.nome_crianca);
           localStorage.setItem("email", res.data.email);
           localStorage.setItem("usuario", res.data.usuario);
+
+          location.reload();
         }
         console.log("Login realizado com sucesso!", res.data);
       } 

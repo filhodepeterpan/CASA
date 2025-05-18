@@ -35,7 +35,7 @@ export class ConfiguracoesPage implements OnInit {
   fotoDePerfil: string = "padrao";
   // Armazena o ícone selecionado temporariamente para alteração visual do perfil
   iconeSelecionado: string = this.fotoDePerfil;
-  
+  logado: boolean = false;
   // Objeto "perfil" que guarda o caminho (URL) da imagem do perfil; usado na interface (imagem exibida)
   perfil: { foto: string } = {
     foto: `assets/perfil-icons/${this.fotoDePerfil}.png`
@@ -97,6 +97,8 @@ export class ConfiguracoesPage implements OnInit {
     this.modoEscuro = localStorage.getItem("modoEscuro") == "true";
     // Aplica as classes necessárias para o modo escuro na aplicação
     this.aplicaModoEscuro();
+
+    this.logado = localStorage.getItem("logado") === "true";
   }
 
   // MÉTODO NGONINIT

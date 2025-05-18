@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { StatusBar } from '@capacitor/status-bar';
 import { Platform, MenuController, AlertController } from '@ionic/angular';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +45,17 @@ export class AppComponent implements OnInit {
       this.fotoDePerfil = iconeSalvo;
       this.perfil.foto = `assets/perfil-icons/${this.fotoDePerfil}.png`;
     }
+
+    // garante que o app não vai ser inseguro de poder ter suas páginas acessadas pela url
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      const logado = localStorage.getItem('logado') === 'true';
+      const rotaAtual = this.router.url;
+
+      if (!logado && rotaAtual !== '/home') {
+        this.router.navigate(['/home']);
+      }
+    });
+
   }
 
   perfil: {foto: string} = {
@@ -66,7 +77,15 @@ async logout(saida: boolean) {
         text: 'Sair',
         handler: () => {
           this.logado = saida;
-          localStorage.setItem("logado", saida.toString());
+          localStorage.removeItem("logado"); // não permite que o logado seja alterado pra true manualmente, uma vez que é removido
+
+          // remove informações do local storage para não vazar
+          localStorage.removeItem("id");
+          localStorage.removeItem("casaID");
+          localStorage.removeItem("nomeTutor");
+          localStorage.removeItem("nomeCrianca");
+          localStorage.removeItem("email");
+          localStorage.removeItem("usuario");
 
           this.router.navigate(['/home']).then(() => {
             setTimeout(() => location.reload(), 100);
