@@ -11,7 +11,7 @@
             </div>
           </div>
           <div id="menu-lista-usuario-botoes">
-            <ion-button routerLink="/configuracoes"  id="menu-lista-usuario-botoes-config" (click)="fechaMenu()">
+            <ion-button routerLink="/configuracoes" id="menu-lista-usuario-botoes-config" (click)="fechaMenu()">
               <ion-icon class="icone-botao" name="settings-outline"></ion-icon>
               Configurações
             </ion-button>
@@ -38,13 +38,28 @@
             <ion-icon name="information-circle-outline"></ion-icon>
             Sobre nós
           </ion-item>
-        </div>    
+          <ion-item *ngIf="acessoDeAdministrador" routerLink="/gerenciamento" routerDirection="root"
+            class="menu-item-lista" (click)="fechaMenu()">
+            <ion-icon name="build-outline"></ion-icon>
+            Gerenciar
+          </ion-item>
+        </div>
+        <div>
+          <ion-button id="botao-conexao" expand="full" class="ion-margin" (click)="verificaConexao()"
+            [color]="corBotaoConexao">
+            <ng-container *ngIf="carregandoConexao; else wifiIcone">
+              <ion-spinner name="crescent" class="spinner-carregando"></ion-spinner>
+              Conectando...
+            </ng-container>
+            <ng-template #wifiIcone>
+              <ion-icon class="icone-botao" name="wifi"></ion-icon>
+              {{ dispositivoConectado ? "Conectado" : "Desconectado" }}
+            </ng-template>
+          </ion-button>
+
+        </div>
       </ion-list>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
-
-
-
-

@@ -119,6 +119,10 @@ ion-buttons{
     background-color: #c1e0f1;
 }
 
+#login-container-caixa p{
+    color: var(--cor-fonte);
+}
+
 #login-container-caixa-form{
     display: flex;
     flex-direction: column;
@@ -131,6 +135,7 @@ ion-buttons{
     align-items: center;
     --ion-background-color: white;
     border-radius: 24px;
+    height: 3.5rem;
 }
 
 #login{
@@ -142,10 +147,17 @@ ion-buttons{
     justify-content: center;
 }
 
-#entrar{
+.entrar{
     --background: #ff3561;
     color: #fdc05e;
     margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.entrar ion-icon{
+    margin-left: 0.5rem;
 }
 
 .overlay {
@@ -192,26 +204,18 @@ ion-buttons{
     color: var(--cor-fonte);
     opacity: 55%;
   }
-  
-// ALERTAS
-
-.alerta{
-
-}
-
-.alerta-alteracao{
-    
-}
-
-.botao-{
-
-}
-
-// ICONES DE INPUT
 
 .icone-senha {
   cursor: pointer;
 }
+
+.spinner-carregando{
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 0.25rem;
+}
+
+
   
 
 

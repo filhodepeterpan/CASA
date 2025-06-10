@@ -1,0 +1,63 @@
+.sessao-card {
+    --background: var(--cor-terciaria-forte);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    height: 200px;
+}
+
+.sessao-card-nome {
+    color: var(--cor-fonte);
+    font-size: 1.2rem;
+}
+
+.sessao-card-icone {
+    color: var(--cor-fonte);
+}
+
+.sessao-nome {
+    text-align: center;
+    padding: 1rem 1rem 2rem 1rem;
+    font-family: var(--fonte-especial);
+    font-size: 2.5rem;
+    color: var(--cor-fonte);
+}
+
+.tabela-cards{
+    display: flex;
+    justify-content: center;
+}
+
+#cards-info{
+    color: black;
+    display: flex;
+    align-items: center;
+    background-color: rgb(250, 250, 250);
+    border-radius: 12px;
+    margin: 1rem;
+    width: 100%;
+}
+
+@media(max-width: 1024px) {
+    #cards-info-imagem{
+        text-align: center;
+        width: 100%;
+    }
+    
+    #cards-info-dados{
+        margin-left: 0.5rem;
+    }
+
+    #cards-info-dados h1{
+        text-align: center;
+    }
+}
+
+.botao-copiar{
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: black;
+}

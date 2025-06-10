@@ -22,6 +22,9 @@ const routes: Routes = [
   {
     path: 'contato',
     loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
+  },  {
+    path: 'gerenciamento',
+    loadChildren: () => import('./gerenciamento/gerenciamento.module').then( m => m.GerenciamentoPageModule)
   }
 ];
 

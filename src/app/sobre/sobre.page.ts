@@ -16,10 +16,10 @@ export class SobrePage implements OnInit {
     { nome: "Jhonatan", funcao: "BACK-END", foto: "assets/autores/jhonatan.png", local: "EXTENSÃO"},
     { nome: "Daiane", funcao: "DOCUMENTAÇÃO", foto: "assets/autores/daiane.png", local: "EXTENSÃO"},
     { nome: "Gustavo", funcao: "EDITOR", foto: "assets/autores/gustavo.png", local: "EXTENSÃO"},
-    { nome: "Raphael", funcao: "PESQUISADOR", foto: "assets/autores/raphael.png", local: "SEDE"},
-    { nome: "Yasmin", funcao: "PESQUISADOR", foto: "assets/autores/yasmin.png", local: "SEDE"},
-    { nome: "Priscila", funcao: "PESQUISADOR", foto: "assets/autores/priscila.png", local: "SEDE"},
-    { nome: "Zeus", funcao: "PESQUISADOR", foto: "assets/autores/zeus.png", local: "SEDE"}
+    { nome: "Raphael", funcao: "DESENVOLVEDOR", foto: "assets/autores/raphael.png", local: "SEDE"},
+    { nome: "Yasmin", funcao: "PESQUISADORA", foto: "assets/autores/yasmin.png", local: "SEDE"},
+    { nome: "Priscila", funcao: "PESQUISADORA", foto: "assets/autores/priscila.png", local: "SEDE"},
+    { nome: "Zeus", funcao: "DESENVOLVEDOR", foto: "assets/autores/zeus.png", local: "SEDE"}
   ]
 
   constructor() {

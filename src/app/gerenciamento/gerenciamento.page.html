@@ -1,0 +1,107 @@
+<ion-header [translucent]="true" *ngIf="logado">
+  <ion-toolbar id="barra-app">
+    <ion-buttons slot="start" id="botao-header">
+      <ion-menu-button autoHide="false" *ngIf="!sessaoEscolhida"></ion-menu-button>
+      <ion-back-button *ngIf="sessaoEscolhida" (click)="volta()" defaultHref="/gerenciamento"></ion-back-button>
+    </ion-buttons>
+    <ion-title id="titulo-app">
+      <div id="titulo-app-logo">
+        <h1>Gerenciamento</h1>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="logado && acessoDeAdministrador" class="ion-padding">
+
+  <ion-grid id="sessoes" *ngIf="!sessaoEscolhida">
+    <ion-row>
+
+      <ion-col [size]="colSizeSessao" class="sessao">
+        <ion-card class="sessao-card" (click)="escolheSessao('Usuários')">
+          <ion-card-header class="sessao-card-nome">
+            Usuários
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="person" size="large" class="sessao-card-icone"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col [size]="colSizeSessao" class="sessao">
+        <ion-card class="sessao-card" (click)="escolheSessao('Cards')">
+          <ion-card-header class="sessao-card-nome">
+            Cards
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="albums" size="large" class="sessao-card-icone"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col [size]="colSizeSessao" class="sessao">
+        <ion-card class="sessao-card" (click)="escolheSessao('Estatísticas')">
+          <ion-card-header class="sessao-card-nome">
+            Estatísticas
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="analytics" size="large" class="sessao-card-icone"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid id="sessao-info" *ngIf="sessaoEscolhida">
+
+    <h1 class="sessao-nome">{{sessao}}</h1>
+
+    <div *ngIf="sessao === 'Usuários'">
+      
+    </div>
+
+    <div *ngIf="sessao === 'Cards'">
+      <ion-row>
+        <ion-col [size]="colSizeCardsInfo" *ngFor="let card of cards" class="tabela-cards">
+          <ion-row id="cards-info">
+            <ion-col id="cards-info-imagem" [size]="colSizeCardsInfoSessao">
+              <img [src]="card.imagem_url" width="200px" loading="lazy" alt="{{card.titulo}}">
+            </ion-col>
+            <ion-col id="cards-info-dados" [size]="colSizeCardsInfoSessao">
+              <h1 class="ion-padding-bottom">{{card.titulo}}</h1>
+              <i>ID na API: {{card.id}}</i>
+              <p><b>Categoria:</b> {{card.categoria}}</p>
+              <div>
+                <b>Local de Armazenamento da Imagem:</b>
+                <ion-chip [color]="corChip" class="link-box" (click)="copiaTexto(card.imagem_url)">
+                  <ion-label class="truncate botao-copiar">
+                    <span>
+                      Copiar
+                    </span>
+                    <ion-icon name="copy-outline" class="icon-copiar"></ion-icon>
+                  </ion-label>
+                </ion-chip>
+              </div>
+
+              <div>
+                <b>Local de Armazenamento do Áudio:</b>
+                <ion-chip [color]="corChip" class="link-box" (click)="copiaTexto(card.som_url)">
+                  <ion-label class="truncate botao-copiar">
+                    <span>
+                      Copiar
+                    </span>
+                    <ion-icon name="copy-outline" class="icon-copiar"></ion-icon>
+                  </ion-label>
+                </ion-chip>
+              </div>
+
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+    </div>
+  </ion-grid>
+
+</ion-content>

@@ -26,7 +26,23 @@
           Modo Escuro
         </ion-toggle>
       </ion-item>
+      
+      <!-- <ion-item class="config-item" id="som-feedback">
+        <ion-icon name="volume-high"></ion-icon>
+        <ion-toggle labelPlacement="start" alignment="center" aria-label="som-feedback" [checked]="somAtivo"
+          (ionChange)="toggleSomFeedback($event)">
+          Som de Feedback
+        </ion-toggle>
+      </ion-item> -->
+
     </ion-list>
+  </div>
+
+  <div id="campo-de-informacao">
+    <div id="informativo">
+      <ion-icon name="information-circle-outline" id="icone-de-informacao" [size]="tamanhoInformativo"></ion-icon>
+      <p>Todas as alterações de "Perfil" e "Conta" apenas serão salvos ao clicar no botão "Salvar".</p>
+    </div>
   </div>
 
   <div class="config">
@@ -56,8 +72,7 @@
               </ion-grid>
 
               <div id="alteracoes">
-                <ion-button id="alterar-icone" (click)="mudaIcone()">Alterar Ícone</ion-button>
-                <ion-button id="remover-icone" (click)="removeIcone()">Remover</ion-button>
+                <ion-button id="remover-icone" (click)="removeIcone()">Remover ícone</ion-button>
               </div>
             </div>
           </div>
@@ -104,18 +119,23 @@
                 <ion-input type="password" [(ngModel)]="novaSenha" name="novaSenha" [readonly]="!alteracaoDeSenha">
                 </ion-input>
                 <ion-buttons slot="end" (click)="ativaEdicaoSenha()">
-                  <ion-icon [name]="alteracaoDeSenha ? 'checkmark' : 'create-outline'" color="dark" size="large" id="botaoEditarSenha"></ion-icon>
+                  <ion-icon [name]="alteracaoDeSenha ? 'checkmark' : 'create-outline'" color="dark" size="large"
+                    id="botaoEditarSenha"></ion-icon>
                 </ion-buttons>
               </ion-item>
 
-              <ion-item class="login-container-caixa-form-item campoDesativado" [ngClass]="{'campoDesativado' : !alteracaoDeSenha}">
+              <ion-item class="login-container-caixa-form-item campoDesativado"
+                [ngClass]="{'campoDesativado' : !alteracaoDeSenha}">
                 <ion-label position="floating">Confirmar senha</ion-label>
-                <ion-input type="password" [(ngModel)]="confirmarSenha" name="confirmarSenha" [readonly]="!alteracaoDeSenha"></ion-input>
+                <ion-input type="password" [(ngModel)]="confirmarSenha" name="confirmarSenha"
+                  [readonly]="!alteracaoDeSenha"></ion-input>
               </ion-item>
             </div>
 
-            <ion-button expand="full" type="submit">Salvar</ion-button>
-            <ion-button expand="full" (click)="deletaConta()" color="dark">Excluir conta</ion-button>
+            <div>
+              <ion-button id="salvar" expand="full" type="submit">Salvar</ion-button>
+              <ion-button id="deletarConta" expand="full" (click)="deletaConta()" color="dark">Excluir conta</ion-button>
+            </div>
           </form>
         </ion-col>
 

@@ -21,7 +21,7 @@
     color: var(--cor-fonte);
 }
 
-#modo-escuro ion-icon{
+.config-item ion-icon{
     padding: 0 0.5rem 0.1rem 0;
     color: var(--cor-fonte);
 }
@@ -104,7 +104,6 @@
 }
 
 form ion-button{
-    padding: 1rem 0;
     --background: var(--cor-secundaria-forte);
 }
 
@@ -114,4 +113,26 @@ form ion-button{
 
 #botaoEditarSenha:hover{
     cursor: pointer;
+}
+
+#salvar, #deletarConta{
+    margin: 1rem 0;
+    height: 3.25rem;
+}
+
+#campo-de-informacao{
+    display: flex;
+    justify-content: center;
+}
+
+#informativo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.8em;
+    border-radius: 16px;
+    padding: 0.1rem 0.5rem;
+    margin: 1rem;
+    background-color: rgb(231, 231, 231);
 }

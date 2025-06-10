@@ -2,6 +2,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { AlertController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-configuracoes',
@@ -19,7 +22,7 @@ export class ConfiguracoesPage implements OnInit {
   colSizeEditProfileInfo = '12';
   // Tamanho das colunas para os ícones de perfil
   colSizeIcons = '4';
-  
+
   // Propriedades dos dados da conta (informações que serão preenchidas e alteradas via formulário)
   casaID: string = "";
   nomeTutor: string = "";
@@ -29,10 +32,13 @@ export class ConfiguracoesPage implements OnInit {
   // Propriedades para alteração de senha (nova senha e confirmação)
   novaSenha: string = "";
   confirmarSenha: string = "";
-  alteracaoDeSenha : boolean = false;
+  alteracaoDeSenha: boolean = false;
+  tamanhoInformativo: string = "small";
+  somAtivo: boolean = false;
+  audioClick!: HTMLAudioElement;
 
   // ID do usuário, utilizado para identificar o registro no banco durante atualizações ou exclusões
-  id: number = 0; 
+  id: number = 0;
 
   // Propriedade referente à foto de perfil, usada para exibição (não será alterada nesta operação)
   fotoDePerfil: string = "padrao";
@@ -70,30 +76,30 @@ export class ConfiguracoesPage implements OnInit {
     { nome: 'menina-negra-2', src: 'assets/perfil-icons/menina-negra-2.png' },
     { nome: 'menino-negro-2', src: 'assets/perfil-icons/menino-negro-2.png' },
     { nome: 'crianca-sem-cabelo', src: 'assets/perfil-icons/crianca-sem-cabelo.png' },
-    { nome: 'dinossauro', src: 'assets/perfil-icons/dinossauro.png'},
-    { nome: 'gata', src: 'assets/perfil-icons/gata.png'},
-    { nome: 'cachorro', src: 'assets/perfil-icons/cachorro.png'},
-    { nome: 'pinguim', src: 'assets/perfil-icons/pinguim.png'},
-    { nome: 'panda', src: 'assets/perfil-icons/panda.png'},
-    { nome: 'dragao-verde', src: 'assets/perfil-icons/dragao-verde.png'},
-    { nome: 'dragao-vermelho', src: 'assets/perfil-icons/dragao-vermelho.png'},
-    { nome: 'astronauta', src: 'assets/perfil-icons/astronauta.png'},
-    { nome: 'robo', src: 'assets/perfil-icons/robo.png'},
-    { nome: 'samurai', src: 'assets/perfil-icons/samurai.png'},
-    { nome: 'detetive', src: 'assets/perfil-icons/detetive.png'},
-    { nome: 'princesa-1', src: 'assets/perfil-icons/princesa-1.png'},
-    { nome: 'princesa-2', src: 'assets/perfil-icons/princesa-2.png'},
-    { nome: 'escudeiro', src: 'assets/perfil-icons/escudeiro.png'},
-    { nome: 'elfo-arqueiro', src: 'assets/perfil-icons/elfo-arqueiro.png'},
-    { nome: 'cavaleira', src: 'assets/perfil-icons/cavaleira.png'},
-    { nome: 'maga', src: 'assets/perfil-icons/maga.png'},
-    { nome: 'mago', src: 'assets/perfil-icons/mago.png'},
-    { nome: 'fada', src: 'assets/perfil-icons/fada.png'},
+    { nome: 'dinossauro', src: 'assets/perfil-icons/dinossauro.png' },
+    { nome: 'gata', src: 'assets/perfil-icons/gata.png' },
+    { nome: 'cachorro', src: 'assets/perfil-icons/cachorro.png' },
+    { nome: 'pinguim', src: 'assets/perfil-icons/pinguim.png' },
+    { nome: 'panda', src: 'assets/perfil-icons/panda.png' },
+    { nome: 'dragao-verde', src: 'assets/perfil-icons/dragao-verde.png' },
+    { nome: 'dragao-vermelho', src: 'assets/perfil-icons/dragao-vermelho.png' },
+    { nome: 'astronauta', src: 'assets/perfil-icons/astronauta.png' },
+    { nome: 'robo', src: 'assets/perfil-icons/robo.png' },
+    { nome: 'samurai', src: 'assets/perfil-icons/samurai.png' },
+    { nome: 'detetive', src: 'assets/perfil-icons/detetive.png' },
+    { nome: 'princesa-1', src: 'assets/perfil-icons/princesa-1.png' },
+    { nome: 'princesa-2', src: 'assets/perfil-icons/princesa-2.png' },
+    { nome: 'escudeiro', src: 'assets/perfil-icons/escudeiro.png' },
+    { nome: 'elfo-arqueiro', src: 'assets/perfil-icons/elfo-arqueiro.png' },
+    { nome: 'cavaleira', src: 'assets/perfil-icons/cavaleira.png' },
+    { nome: 'maga', src: 'assets/perfil-icons/maga.png' },
+    { nome: 'mago', src: 'assets/perfil-icons/mago.png' },
+    { nome: 'fada', src: 'assets/perfil-icons/fada.png' },
   ];
 
   // CONSTRUTOR
   // O construtor injeta o serviço do usuário e chama funções para configurar a interface
-  constructor(private usuarioService: UsuarioService, private alertController: AlertController) { 
+  constructor(private usuarioService: UsuarioService, private alertController: AlertController, private AuthService: AuthService, private router: Router) {
     // Ajusta a interface com base na orientação da tela
     this.checaOrientacao();
     // Recupera o valor do modo escuro armazenado em localStorage
@@ -107,21 +113,22 @@ export class ConfiguracoesPage implements OnInit {
   // MÉTODO NGONINIT
   // É executado assim que o componente é inicializado
   ngOnInit() {
+    localStorage.removeItem("iconeSelecionado");
     // Verifica se há um ícone salvo para o perfil e atualiza o objeto "perfil"
     const iconeSalvo = localStorage.getItem('fotoDePerfil');
+
     if (iconeSalvo) {
       this.fotoDePerfil = iconeSalvo;
       this.perfil.icone = `assets/perfil-icons/${this.fotoDePerfil}.png`;
     }
-    
+
     // Carrega os demais dados do usuário armazenados no localStorage para pré-preencher os inputs
     this.casaID = localStorage.getItem("casaID") || "";
     this.nomeTutor = localStorage.getItem('nomeTutor') || "";
     this.nomeCrianca = localStorage.getItem('nomeCrianca') || "";
     this.email = localStorage.getItem('email') || "";
     this.usuario = localStorage.getItem('usuario') || "";
-    // Converte para número, caso contrário o valor é uma string
-    this.id = Number(localStorage.getItem('id')) || 0;
+    //Verifica o ID do local storage e depois o remove por segurança
   }
 
   // HOST LISTENER para redimensionamento da janela
@@ -131,10 +138,15 @@ export class ConfiguracoesPage implements OnInit {
     this.colSizeEditProfileImg = window.innerWidth > window.innerHeight ? '5' : '12';
     this.colSizeEditProfileInfo = window.innerWidth > window.innerHeight ? '7' : '12';
     this.colSizeIcons = window.innerWidth > window.innerHeight ? '3' : '4';
+    this.tamanhoInformativo = window.innerWidth > window.innerHeight ? 'small' : 'large';
   }
-  
+
+  toggleSomFeedback(event: any) {
+    this.somAtivo = event.detail.checked;
+    localStorage.setItem('somFeedback', this.somAtivo.toString());
+  }
   // Função para alternar o modo escuro utilizando um toggle na interface
-  toggleModoEscuro(event: any){
+  toggleModoEscuro(event: any) {
     // Atualiza a propriedade modoEscuro com base no evento disparado
     this.modoEscuro = event.detail.checked;
     // Salva a preferência do modo escuro no localStorage (como string)
@@ -142,175 +154,236 @@ export class ConfiguracoesPage implements OnInit {
     // Aplica a classe "dark" se o modo estiver ativo
     this.aplicaModoEscuro();
   }
-  
+
   // Aplica ou remove a classe "dark" no documento, conforme o valor de modoEscuro
-  aplicaModoEscuro(){
+  aplicaModoEscuro() {
     const aplicativo = document.documentElement;
     // Se modoEscuro for true, adiciona a classe "dark", senão, remove-a
     this.modoEscuro ? aplicativo.classList.add("dark") : aplicativo.classList.remove("dark");
   }
 
   // Método para atualizar os dados da conta do usuário
-async atualizaCadastro(form: NgForm) {
-  const dadosForm = form.value;
+  async atualizaCadastro(form: NgForm) {
+    const dadosForm = form.value;
 
-  // Validação para senha
-  if ((this.novaSenha || this.confirmarSenha) && (this.novaSenha !== this.confirmarSenha)) {
-    const alert = await this.alertController.create({
-      header: 'Erro',
-      message: 'As senhas não coincidem.',
-      cssClass: 'alerta-alteracao',
-      buttons: ['OK']
-    });
-    await alert.present();
-    return;
-  }
-
-  // Prepara os dados atualizados
-  let dadosAtualizados: any = {
-    id: this.id,
-    id_casa: this.casaID, // Inclui o ID da CASA manualmente
-    nome_tutor: dadosForm.nomeTutor,
-    nome_crianca: dadosForm.nomeCrianca,
-    email: dadosForm.email,
-    usuario: dadosForm.usuario,
-    icone: this.fotoDePerfil
-  };
-
-  // Adiciona a senha se foi alterada
-  if (this.novaSenha) {
-    dadosAtualizados.senha = this.novaSenha;
-  }
-
-  // Envia os dados para o backend
-  this.usuarioService.atualizarUsuario(dadosAtualizados).subscribe(
-    async (res: any) => {
-      if (res.status === "sucesso") {
-        const successAlert = await this.alertController.create({
-          header: 'Sucesso!',
-          message: 'Dados atualizados com sucesso.',
-          cssClass: 'alerta-alteracao',
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                location.reload();
-              }
-            }
-          ]
-        });
-        await successAlert.present();
-
-        // Atualiza localStorage
-        localStorage.setItem("nomeTutor", dadosForm.nomeTutor);
-        localStorage.setItem("nomeCrianca", dadosForm.nomeCrianca);
-        localStorage.setItem("email", dadosForm.email);
-        localStorage.setItem("usuario", dadosForm.usuario);
-        localStorage.setItem("fotoDePerfil", this.fotoDePerfil);
-      } else {
-        const errorAlert = await this.alertController.create({
-          header: 'Erro',
-          message: 'Erro ao atualizar: ' + res.message,
-          cssClass: 'alerta-alteracao',
-          buttons: ['OK']
-        });
-        await errorAlert.present();
-      }
-    },
-    async (err: any) => {
-      const connectionAlert = await this.alertController.create({
-        header: 'Erro de conexão',
-        message: 'Erro ao conectar com o servidor.',
+    // Validação para senha
+    if ((this.novaSenha || this.confirmarSenha) && (this.novaSenha !== this.confirmarSenha)) {
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        message: 'As senhas não coincidem.',
         cssClass: 'alerta-alteracao',
         buttons: ['OK']
       });
-      await connectionAlert.present();
-      console.error("Erro na requisição:", err);
+      await alert.present();
+      return;
     }
-  );
-}
 
-ativaEdicaoSenha() {
-  this.alteracaoDeSenha = !this.alteracaoDeSenha;
-}
+    // Prepara os dados atualizados
+    let dadosAtualizados: any = {
+      id: this.AuthService.getId(),
+      id_casa: this.casaID, // Inclui o ID da CASA manualmente
+      nome_tutor: dadosForm.nomeTutor,
+      nome_crianca: dadosForm.nomeCrianca,
+      email: dadosForm.email,
+      usuario: dadosForm.usuario,
+      icone: this.iconeSelecionado
+    };
 
-  // Função para deletar a conta do usuário
-async deletaConta() {
-  const alert = await this.alertController.create({
-    header: 'Deseja excluir sua conta?',
-    message: 'Você realmente deseja excluir a sua conta? Todos os seus dados do CASA serão apagados. Esta ação não pode ser desfeita.',
-    cssClass: 'alerta',
-    buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancel',
-        cssClass: 'botao-cancelar',
-        handler: () => {
-          console.log('Exclusão cancelada');
+    // Adiciona a senha se foi alterada
+    if (this.novaSenha) {
+      dadosAtualizados.senha = this.novaSenha;
+    }
+
+    // Envia os dados para o backend
+    this.usuarioService.atualizarUsuario(dadosAtualizados).subscribe(
+      async (res: any) => {
+        if (res.status === "sucesso") {
+          const successAlert = await this.alertController.create({
+            header: 'Sucesso!',
+            message: 'Dados atualizados com sucesso.',
+            cssClass: 'alerta-alteracao',
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  location.reload();
+                }
+              }
+            ]
+          });
+          await successAlert.present();
+
+          // Atualiza localStorage
+          localStorage.setItem("nomeTutor", dadosForm.nomeTutor);
+          localStorage.setItem("nomeCrianca", dadosForm.nomeCrianca);
+          localStorage.setItem("email", dadosForm.email);
+          localStorage.setItem("usuario", dadosForm.usuario);
+          localStorage.setItem("fotoDePerfil", this.fotoDePerfil);
+        } else {
+          const errorAlert = await this.alertController.create({
+            header: 'Erro',
+            message: 'Erro ao atualizar: ' + res.message,
+            cssClass: 'alerta-alteracao',
+            buttons: ['OK']
+          });
+          await errorAlert.present();
         }
       },
-      {
-        text: 'Sim, deletar',
-        cssClass: 'botao-confirmar',
-        handler: () => {
-          this.usuarioService.deletarUsuario(this.id).subscribe(
-            (res: any) => {
-              if (res.status === "sucesso") {
-                this.alertController.create({
-                  header: 'Conta deletada',
-                  message: 'Sua conta foi excluída com sucesso.',
-                  buttons: ['OK']
-                }).then(alert => alert.present());
-                
-                localStorage.clear();
-                // this.router.navigate(['/login']); // Opcional
-              } else {
-                this.alertController.create({
-                  header: 'Erro',
-                  message: 'Erro ao deletar a conta: ' + res.message,
-                  buttons: ['OK']
-                }).then(alert => alert.present());
-              }
-            },
-            (err: any) => {
-              this.alertController.create({
-                header: 'Erro de conexão',
-                message: 'Erro ao conectar com o servidor.',
-                buttons: ['OK']
-              }).then(alert => alert.present());
-
-              console.error("Erro na requisição:", err);
-            }
-          );
-        }
+      async (err: any) => {
+        const connectionAlert = await this.alertController.create({
+          header: 'Erro de conexão',
+          message: 'Erro ao conectar com o servidor.',
+          cssClass: 'alerta-alteracao',
+          buttons: ['OK']
+        });
+        await connectionAlert.present();
+        console.error("Erro na requisição:", err);
       }
-    ]
-  });
+    );
+  }
 
-  await alert.present();
-}
+  ativaEdicaoSenha() {
+    this.alteracaoDeSenha = !this.alteracaoDeSenha;
+  }
+
+  // Função para deletar a conta do usuário
+  async deletaConta() {
+    const senhaAlert = await this.alertController.create({
+      header: 'Confirmação de senha',
+      message: 'Digite sua senha para confirmar:',
+      cssClass: 'alerta',
+      inputs: [
+        {
+          name: 'senha',
+          type: 'password',
+          placeholder: 'Sua senha'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'botao-cancelar',
+          handler: () => {
+            console.log('Exclusão cancelada');
+          }
+        },
+        {
+          text: 'Confirmar',
+          cssClass: 'botao-confirmar',
+          handler: async (data) => {
+            const senha = data.senha;
+            const id = this.AuthService.getId() || 0;
+
+            try {
+              const validacao = await firstValueFrom(this.usuarioService.verificarSenha(id, senha));
+
+              if (validacao.senhaCorreta) {
+                this.confirmaExclusao(); // Chama a função que mostra o segundo alerta
+              } else {
+                const erroAlert = await this.alertController.create({
+                  header: 'Senha incorreta',
+                  message: 'A senha digitada está incorreta.',
+                  buttons: ['OK']
+                });
+                await erroAlert.present();
+              }
+            } catch (err) {
+              const erroAlert = await this.alertController.create({
+                header: 'Erro',
+                message: 'Erro ao validar a senha. Tente novamente.',
+                buttons: ['OK']
+              });
+              await erroAlert.present();
+            }
+
+            return false; // Impede que o alert feche automaticamente
+          }
+        }
+      ]
+    });
+
+    await senhaAlert.present();
+  }
+
+  async confirmaExclusao() {
+    const confirmAlert = await this.alertController.create({
+      header: 'Deseja excluir sua conta?',
+      message: 'Você realmente deseja excluir a sua conta? Todos os seus dados do CASA serão apagados. Esta ação não pode ser desfeita.',
+      cssClass: 'alerta',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'botao-cancelar',
+          handler: () => {
+            console.log('Exclusão cancelada');
+          }
+        },
+        {
+          text: 'Sim, deletar',
+          cssClass: 'botao-confirmar',
+          handler: () => {
+            const id = this.AuthService.getId() || 0;
+            this.usuarioService.deletarUsuario(id).subscribe(
+              async (res: any) => {
+                if (res.status === "sucesso") {
+                  const sucessoAlert = await this.alertController.create({
+                    header: 'Conta deletada',
+                    message: 'Sua conta foi excluída com sucesso.',
+                    buttons: ['OK']
+                  });
+                  await sucessoAlert.present();
+
+                  localStorage.clear();
+                  this.router.navigate(['/home']).then(() => {
+                    setTimeout(() => location.reload(), 100);
+                  });
+                } else {
+                  const erroAlert = await this.alertController.create({
+                    header: 'Erro',
+                    message: 'Erro ao deletar a conta: ' + res.message,
+                    buttons: ['OK']
+                  });
+                  await erroAlert.present();
+                }
+              },
+              async (err: any) => {
+                const erroAlert = await this.alertController.create({
+                  header: 'Erro de conexão',
+                  message: 'Erro ao conectar com o servidor.',
+                  buttons: ['OK']
+                });
+                await erroAlert.present();
+                console.error("Erro na requisição:", err);
+              }
+            );
+          }
+        }
+      ]
+    });
+
+    await confirmAlert.present();
+  }
+
 
   // MÉTODO PARA TRATAR ÍCONES (não alterados, apenas comentários adicionais)
-  
+
   // Atualiza a visualização do ícone selecionado, alterando a imagem exibida
   visualizaIcone(nome: string) {
     this.iconeSelecionado = nome;
     this.perfil.icone = `assets/perfil-icons/${this.iconeSelecionado}.png`;
-  }
-
-  // Atualiza o ícone do perfil, salvando a escolha no localStorage e recarregando a página para refletir a mudança
-  mudaIcone() {
     this.fotoDePerfil = this.iconeSelecionado;
-    localStorage.setItem('fotoDePerfil', this.fotoDePerfil);
-    location.reload();
+    localStorage.setItem('iconeSelecionado', this.fotoDePerfil);
   }
 
   // Remove o ícone personalizado e retorna ao ícone padrão (removendo a informação do localStorage e recarregando)
-  removeIcone(){
+  removeIcone() {
     this.fotoDePerfil = 'padrao';
     this.perfil.icone = `assets/perfil-icons/${this.fotoDePerfil}.png`;
     localStorage.removeItem('fotoDePerfil');
-    location.reload();
+    this.router.navigate(['/configuracoes']);
   }
+
 }
 

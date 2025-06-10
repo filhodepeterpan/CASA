@@ -59,6 +59,10 @@
   color: var(--cor-fonte);
 }
 
+.card-imagem{
+  border-radius: 12px
+}
+
 .card-container, .categorias-container{
   display: flex;
   justify-content: center;
