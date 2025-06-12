@@ -4,6 +4,8 @@ import { Platform, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
 import { NgForm } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 import { UsuarioService } from '../services/usuario.service';
 import { AuthService } from '../services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -46,6 +48,7 @@ export class HomePage {
   colSizeLoginSection = '12';
   // Flag para exibir ou ocultar a senha
   mostrarSenha: boolean = false;
+  private enviaIDSubject = new Subject<{ id: number, cardImg: HTMLImageElement }>();
 
   // Lista de categorias com seus respectivos ícones e cores
   categorias = [
@@ -84,6 +87,12 @@ export class HomePage {
         // Se apenas estiver na página /home, encerra o aplicativo
         App.exitApp();
       }
+    });
+
+    this.enviaIDSubject.pipe(
+      throttleTime(2000) // impede chamadas menores que 2 segundos
+    ).subscribe(({ id, cardImg }) => {
+      this.enviaIDInterno(id, cardImg);
     });
 
     // Define o estado de 'logado' verificando o valor no localStorage
@@ -340,7 +349,13 @@ export class HomePage {
   }
 
   // Método que envia o ID para o arduino
-  async enviaID(id: number, cardImg: HTMLImageElement) {
+  enviaID(id: number, cardImg: HTMLImageElement) {
+    console.log("funcao externa chamada");
+    this.enviaIDSubject.next({ id, cardImg });
+  }
+
+  private async enviaIDInterno(id: number, cardImg: HTMLImageElement) {
+    console.log("funcao interna chamada");
 
     if (this.conectado) {
       const firebaseUrl = (environment as any).firebaseURL_ID;
@@ -374,7 +389,6 @@ export class HomePage {
     }
     else {
       const alert = await this.alertController.create({
-
         header: 'Dispositivo desconectado',
         message: 'Abra o menu e conecte o dispositivo antes de escolher um card.',
         buttons: ['Ok']
@@ -382,6 +396,5 @@ export class HomePage {
       await alert.present();
     }
   }
-
 
 }
